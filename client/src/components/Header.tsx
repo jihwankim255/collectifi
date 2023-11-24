@@ -263,6 +263,7 @@ const Header = ({toggle}: PageLayoutProps) => {
   const login = useRecoilCallback(({set}) => async () => {
     if (!window.ethereum) {
       console.log('Ethereum not detected in browser');
+      toast.error('Ethereum not detected in browser');
       return;
     }
     await window.ethereum
@@ -304,7 +305,7 @@ const Header = ({toggle}: PageLayoutProps) => {
     logoutRefresh();
     userRefresh();
     toast.success('logged out successfully! 🎉');
-    console.log("logout", result);
+    console.log('logout', result);
     Cookies.remove('connect.sid');
   });
 

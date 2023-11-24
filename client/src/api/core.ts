@@ -1,7 +1,11 @@
 import axios, {AxiosInstance} from 'axios';
 
-export const api: AxiosInstance = axios.create({
-  baseURL: '/api',
+const api: AxiosInstance = axios.create({
+  baseURL: process.env.BASE_URL,
+  headers: {
+    accept: 'application/json',
+  },
+  withCredentials: true,
   timeout: 500000,
 });
 
@@ -27,3 +31,5 @@ api.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+export default api;

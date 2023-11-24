@@ -1,23 +1,23 @@
-import axios from "axios";
-import { SERVERURL, ISCONNECT } from "./atom";
+import axios from './core';
+import {SERVERURL, ISCONNECT} from '../modules/atom';
 
 export const checkLogin = async () => {
   //if(!ISCONNECT) return userInfoData;
-  const options = {
-    method: 'GET',
-    url: `${SERVERURL}/checklogin`,
-    headers: {accept: 'application/json'},
-    withCredentials: true,    
-  };
+  // const options = {
+  //   method: 'GET',
+  //   url: `${SERVERURL}/checklogin`,
+  //   headers: {accept: 'application/json'},
+  //   withCredentials: true,
+  // };
 
   try {
-    const data = await axios(options);
+    const data = await axios('/checklogin');
     return data;
   } catch (err) {
-    console.log("checkLogin err: ",err);
+    console.log('checkLogin err: ', err);
     return null;
   }
-}
+};
 
 export const logout = async () => {
   //if(!ISCONNECT) return sellCardData;
@@ -26,14 +26,14 @@ export const logout = async () => {
     url: `${SERVERURL}/logout`,
     headers: {accept: 'application/json'},
     withCredentials: true,
-    data: {}
+    data: {},
   };
 
   try {
     const data = await axios(options);
     return data;
   } catch (err) {
-    console.log("logout err: ",err);
+    console.log('logout err: ', err);
     return null;
   }
-}
+};
