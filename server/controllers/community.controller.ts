@@ -46,7 +46,6 @@ export const community_get = async (req: MyRequest, res: Response, next: NextFun
           {
             model: db.Post_comment,
           },
-          
         ],
       });
     }
@@ -69,11 +68,9 @@ export const post_post = async (req: MyRequest, res: Response, next: NextFunctio
     // 1. front에서 데이터 받아오기
     const {title, content} = req.body;
     console.log('================title===============', title);
-    console.log('================title===============', title);
     // 2. session에서 user 추출
     const id = req.session.user?.id;
     const userAddress = req.session.user?.address;
-    console.log('================id=================', id);
     console.log('================id=================', id);
 
     // 3. id로 user 찾기
@@ -88,32 +85,35 @@ export const post_post = async (req: MyRequest, res: Response, next: NextFunctio
       title: title,
       content: content,
     });
-    // 작성자의 address, user_id 추가
-    const postLiked = await db.Post_liked.create({
-      post_id: Number(post.id),
-      address: userAddress,
-      user_id: id,
-    });
+    // 작성자의 address, user_id 추가 => // 작성자가 셀프 좋아요 막는 로직
+    // const postLiked = await db.Post_liked.create({
+    //   post_id: Number(post.id),
+    //   address: userAddress,
+    //   user_id: id,
+    // });
     //5. 잘 저장되었다면, erc-20 토큰을 보상으로 1개 주기
-    if (post) {
-      const web3 = new Web3(
-        new Web3.providers.HttpProvider(`http://127.0.0.1:${process.env.GANACHE_PORT}`),
-      );
-
-      const contract = new web3.eth.Contract(erc20abi, process.env.ERC20_CA);
-      const giveToken = await contract.methods
-        .transfer(user.address, 1)
-        .send({from: process.env.SERVER_ADDRESS, gas: 500000});
-
-      if (giveToken) {
-        //6. 블록체인에서 토큰을 주었다면, db의 token_amount도 1 올려주기
-        const incrementToken = await user.increment('token_amount', {by: 1});
-      }
-    }
 
     // 8. 프론트에 알려주기
+    try {
+      if (post) {
+        const web3 = new Web3(
+          new Web3.providers.HttpProvider(`http://127.0.0.1:${process.env.GANACHE_PORT}`),
+        );
 
-    sendResponse(res, 200, '글 등록 성공!');
+        const contract = new web3.eth.Contract(erc20abi, process.env.ERC20_CA);
+        const giveToken = await contract.methods
+          .transfer(user.address, 1)
+          .send({from: process.env.SERVER_ADDRESS, gas: 500000});
+
+        if (giveToken) {
+          //6. 블록체인에서 토큰을 주었다면, db의 token_amount도 1 올려주기
+          const incrementToken = await user.increment('token_amount', {by: 1});
+        }
+      }
+      sendResponse(res, 200, '게시글이 등록되었습니다.');
+    } catch {
+      sendResponse(res, 400, '네트워크 오류로 토큰 보상이 불가합니다');
+    }
   } catch (e) {
     sendResponse(res, 400, '글 등록 실패!');
     console.log(e);
@@ -193,7 +193,7 @@ export const like_post = async (req: MyRequest, res: Response, next: NextFunctio
     const user = req.session.user;
     // 1-1. 로그인 안했으면 돌려보냄
     if (!user) {
-      sendResponse(res, 400, '로그인을 먼저 하세요');
+      sendResponse(res, 400, '로그인 후 사용 가능합니다');
     }
     // 2. params에 있는 id로 해당 글을 검색
     const {postId} = req.params;
@@ -210,7 +210,7 @@ export const like_post = async (req: MyRequest, res: Response, next: NextFunctio
       sendResponse(res, 400, '요청 실패');
     }
 
-    // post_comment_liked에서 address가 있는지 필터링 후 없을 때 실행.
+    // post_liked에서 address가 있는지 필터링 후 없을 때 실행.
     const posttLikedFind = await db.Post_liked.findOne({
       where: {
         post_id: postId,
@@ -223,9 +223,9 @@ export const like_post = async (req: MyRequest, res: Response, next: NextFunctio
       order: [['id', 'ASC']],
       limit: 1,
     });
-    if (firstData[0].user_id == user?.id) {
-      return sendResponse(res, 400, "You can't Like/Dislike your own post.");
-    }
+    // if (firstData[0].user_id == user?.id) {  // 본인 글에 좋아요 못 누르게 하는 로직
+    //   return sendResponse(res, 400, "You can't Like/Dislike your own post.");
+    // }
     if (posttLikedFind) {
       // return sendResponse(res, 400, firstData[0].address);
       return sendResponse(res, 400, 'You can click the Like/Dislike button only once.');
@@ -253,7 +253,7 @@ export const like_post = async (req: MyRequest, res: Response, next: NextFunctio
 
     //   }
     // }
-    // 지갑 주소와 user_id를 post_comment_likeds에 추가
+    // 지갑 주소와 user_id를 post_liked에 추가
     const posttLiked = await db.Post_liked.create({
       post_id: Number(postId),
       address: user?.address,
@@ -359,10 +359,8 @@ export const comment_post = async (req: MyRequest, res: Response, next: NextFunc
       params: {postId},
     } = req;
     console.log('===========req.params==========', req.params);
-    console.log('===========req.params==========', req.params);
     const userId = req.session.user?.id;
     const userAddress = req.session.user?.address;
-    console.log('========id==========', postId);
     console.log('========id==========', postId);
 
     console.log(typeof userId, typeof Number(postId), typeof postId, typeof content);
@@ -376,12 +374,12 @@ export const comment_post = async (req: MyRequest, res: Response, next: NextFunc
     });
     console.log('comment: ', comment);
 
-    // 3. 작성자의 address와 user_id를 post_comment_liked에 추가
-    const commentLiked = await db.Post_comment_liked.create({
-      post_comment_id: Number(comment.id),
-      address: userAddress,
-      user_id: userId,
-    });
+    // 3. 작성자의 address와 user_id를 post_comment_liked에 추가 => 셀프 좋아요 막는 기능
+    // const commentLiked = await db.Post_comment_liked.create({
+    //   post_comment_id: Number(comment.id),
+    //   address: userAddress,
+    //   user_id: userId,
+    // });
     const result = await db.Post_comment.findOne({
       where: {id: comment.id},
       include: [
@@ -436,15 +434,15 @@ export const likeComment_post = async (req: MyRequest, res: Response, next: Next
         user_id: userId,
       },
     });
-    // 첫번째 데이터는 글쓴이 이므로 글쓴이가 눌렀는지 판단
-    const firstData = await db.Post_comment_liked.findAll({
-      where: {post_comment_id: commentId},
-      order: [['id', 'ASC']],
-      limit: 1,
-    });
-    if (firstData[0].user_id == userId) {
-      return sendResponse(res, 400, "You can't Like/Dislike your own comment.");
-    }
+    // 첫번째 데이터는 글쓴이 이므로 글쓴이가 눌렀는지 판단 => 셀프 좋아요 방지
+    // const firstData = await db.Post_comment_liked.findAll({
+    //   where: {post_comment_id: commentId},
+    //   order: [['id', 'ASC']],
+    //   limit: 1,
+    // });
+    // if (firstData[0].user_id == userId) {
+    //   return sendResponse(res, 400, "You can't Like/Dislike your own comment.");
+    // }
     if (commentLikedFind) {
       // return sendResponse(res, 400, firstData[0].address);
       return sendResponse(res, 400, 'You can click the Like/Dislike button only once.');

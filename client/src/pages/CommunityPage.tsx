@@ -128,7 +128,7 @@ const RankContainer = styled.table`
 
 const Community = () => {
   const navigate = useNavigate();
-  const boardSize = '0.3fr 3fr 0.5fr 0.5fr 1fr 0.5fr 0.5fr';
+  const boardSize = '0.4fr 3fr 0.5fr 0.5fr 1fr 0.5fr 0.5fr';
   const [posts, setPosts] = useState<PostsAttributes[]>([]);
   const [popularPosts, setPopularPosts] = useState<PostsAttributes[]>([]);
   const timeAgo = new TimeAgo('en-US');

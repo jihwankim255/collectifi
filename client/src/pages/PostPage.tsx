@@ -413,7 +413,7 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
       .catch(err => {
         console.log('좋아요를 이미 눌렀습니다', err.response.data.message);
         // alert('Recommendations are only available once a day. ' + err);
-        toast.error('Failed to like comment. ' + err);
+        toast.error('Failed to like comment. ' + err.response.data.message);
       });
   };
   const editComment = (e: number) => {
