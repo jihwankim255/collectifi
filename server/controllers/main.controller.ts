@@ -11,8 +11,6 @@ import {gallerys} from './dummy_gallery';
 const web3 = new Web3(`HTTP://127.0.0.1:${process.env.GANACHE_PORT}`);
 const erc20Contract = new web3.eth.Contract(erc20abi, process.env.ERC20_CA);
 
-// 홈페이지는 프론트에서 서비스 소개 페이지로 대체 될 예정
-
 // 로그인
 export const login_post = async (req: MyRequest, res: Response, next: NextFunction) => {
   try {
@@ -95,7 +93,7 @@ export const checklogin_get = async (req: MyRequest, res: Response, next: NextFu
 export const dummy_get = async (req: MyRequest, res: Response, next: NextFunction) => {
   try {
     //더미 User 10개 만들고 넣기
-    for (let i = 0; i < 10; i++) {
+    for (let i = 1; i < 11; i++) {
       let users = await db.User.create({
         nickname: `user${i}`,
         address: `xdf3234${i}`,
@@ -103,13 +101,14 @@ export const dummy_get = async (req: MyRequest, res: Response, next: NextFunctio
       });
     }
 
-    // //Admin 1개 넣기
+    //Admin 1개 넣기
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash('1234', saltRounds);
 
     const admin = await db.Admin.create({
       username: 'admin',
-      password: hashedPassword,
+      // password: hashedPassword,
+      password: '1234',
     });
 
     // Post 더미 데이터 200개 넣기
@@ -118,7 +117,7 @@ export const dummy_get = async (req: MyRequest, res: Response, next: NextFunctio
         user_id: Math.floor(Math.random() * 10 + 1),
         title: item.title,
         content: item.content,
-        likes: index,
+        likes: Math.floor(Math.random() * 150),
       });
     });
 
