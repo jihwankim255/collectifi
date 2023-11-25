@@ -1,7 +1,6 @@
 import {atom, selector} from 'recoil';
 import {checkLogin, logout} from '../api/wallet';
 
-export const SERVERURL = 'http://localhost:8000';
 export const ISCONNECT = true;
 
 export const userAddr = atom<string>({
@@ -37,6 +36,7 @@ export const checkLoginQuery = selector({
     //get(userAddr);
     const response = await checkLogin();
     if (!response) return null;
+    console.log('checkloginquery: ', response.data);
     return response.data;
   },
 });

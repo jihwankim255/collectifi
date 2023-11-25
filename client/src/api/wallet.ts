@@ -1,5 +1,5 @@
 import axios from './core';
-import {SERVERURL, ISCONNECT} from '../modules/atom';
+import {ISCONNECT} from '../modules/atom';
 
 export const checkLogin = async () => {
   //if(!ISCONNECT) return userInfoData;
@@ -23,7 +23,7 @@ export const logout = async () => {
   //if(!ISCONNECT) return sellCardData;
   const options = {
     method: 'POST',
-    url: `${SERVERURL}/logout`,
+    url: `${process.env.BASE_URL}/logout`,
     headers: {accept: 'application/json'},
     withCredentials: true,
     data: {},

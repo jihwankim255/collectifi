@@ -52,7 +52,7 @@ function App() {
   return (
     <HelmetProvider>
       <Helmet>
-        <title>The largest decentralized football community...</title>
+        <title>The largest decentralized football community</title>
       </Helmet>
       <RecoilRoot>
         <GlobalStyle />
