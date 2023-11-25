@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Layout} from '../Styles';
-import {TabButton, TabLi, TabUl} from './CommunityPage';
 import PageTitle from '../components/UI/PageTitle';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -14,7 +13,7 @@ export const TopBox = styled.div`
   display: flex;
   align-items: start;
   justify-content: space-between;
- //margin-bottom: 25px;
+  //margin-bottom: 25px;
 `;
 
 export const TopTitle = styled.div`
@@ -147,7 +146,7 @@ const Event = () => {
     <Layout>
       <TopBox>
         {/* <TopTitle>Events</TopTitle> */}
-        <PageTitle title='EVENTS'/>
+        <PageTitle title="EVENTS" />
         <TopSearchBar>
           <div>Total : 4 </div>
           <Input placeholder="Search..." />

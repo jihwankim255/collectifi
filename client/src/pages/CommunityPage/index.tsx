@@ -1,22 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import styled, {css} from 'styled-components';
-import {motion} from 'framer-motion';
-import {Link, Route, Routes, useNavigate} from 'react-router-dom';
+import {Route, Routes, useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import {data} from '../data/data';
-import PostPage from './PostPage';
-import Pagination from '../components/UI/Pagination';
-import Button from '../components/UI/Button';
-import BoardList from '../components/UI/BoardList';
-import BoardTitleItem from '../components/UI/BoardTitleItem';
-import BoardListItem from '../components/UI/BoardListItem';
-import PageTitle from '../components/UI/PageTitle';
+import PostPage from '../PostPage';
+import Pagination from '../../components/UI/Pagination';
+import Button from '../../components/UI/Button';
+import BoardList from '../../components/UI/BoardList';
+import BoardTitleItem from '../../components/UI/BoardTitleItem';
+import BoardListItem from '../../components/UI/BoardListItem';
+import PageTitle from '../../components/UI/PageTitle';
 // created_at 포맷 라이브러리
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
-import Tab from '../components/UI/Tab';
-import {darken, lighten} from 'polished';
-import DetailPage from './DetailPage';
+import Styled from './Community.styled';
+import DetailPage from '../DetailPage';
 
 TimeAgo.addDefaultLocale(en);
 export interface PostsAttributes {
@@ -42,89 +38,6 @@ interface IRank {
   likes: number;
   ranking: number;
 }
-const CommunityLayout = styled.div`
-  padding: 40px 20px 30px;
-  max-width: 1140px;
-  margin: 0 auto;
-  margin: 0 auto;
-  @media only screen and (max-width: 1024px) {
-    max-width: 93%;
-  }
-`;
-export const TabUl = styled.ul`
-  margin-bottom: 40px;
-  border-bottom: solid 1px ${props => props.theme.lineColor || 'rgb(0, 0, 0)'};
-`;
-export const TabLi = styled.li`
-  display: inline-flex;
-  margin-right: 40px;
-`;
-export const TabButton = styled.button<{selected: boolean}>`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
-  border: none;
-  font-size: 14px;
-  font-weight: 600;
-  color: rgb(100, 109, 117);
-  cursor: pointer;
-  background: transparent;
-  padding: 0px 0px 12px;
-
-  ${props => {
-    return css`
-      color: ${props.color || 'rgb(0, 0, 0)'};
-      &:hover {
-        color: ${darken(0.2, props.color || 'rgb(0, 0, 0)')};
-      }
-      &:active {
-        color: ${lighten(0.1, props.color || 'rgb(0, 0, 0)')};
-      }
-    `;
-  }}
-
-  ${props => {
-    return (
-      props.selected &&
-      css`
-        color: ${props.theme.mainColor || 'rgb(0, 0, 0)'};
-        box-shadow: 0px 1px 0px 0px ${props.theme.mainColor || 'rgb(0, 0, 0)'};
-      `
-    );
-  }}
-`;
-const PostButtonDiv = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  //margin: 10px;
-`;
-export const RankIcon = styled.img`
-  width: 30px;
-  height: 30px;
-`;
-const RankContainer = styled.table`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 14px;
-  padding: 10px;
-  padding-bottom: 30px;
-  width: 180px;
-  background: rgba(255, 255, 255, 0.3);
-
-  /* background-color: pink; */
-  position: sticky;
-  /* width: 13%; */
-  top: 50%;
-  border-radius: 20px;
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 10px 20px 40px -6px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  /* left: 30%; */
-`;
 
 const Community = () => {
   const navigate = useNavigate();
@@ -227,7 +140,7 @@ const Community = () => {
 
   return (
     <>
-      <CommunityLayout>
+      <Styled.CommunityLayout>
         <PageTitle title="COMMUNITY" />
         <Routes>
           <Route
@@ -241,29 +154,29 @@ const Community = () => {
             }
           />
         </Routes>
-        <PostButtonDiv>
+        <Styled.PostButtonDiv>
           <Button onClick={() => navigate('/write')}>Post</Button>
-        </PostButtonDiv>
-        <TabUl>
-          <TabLi>
-            <TabButton
+        </Styled.PostButtonDiv>
+        <Styled.TabUl>
+          <Styled.TabLi>
+            <Styled.TabButton
               onClick={() => clickHandler('General')}
               selected={tabs === 'General'}
               color={'rgb(123, 123, 123)'}
             >
               General
-            </TabButton>
-          </TabLi>
-          <TabLi>
-            <TabButton
+            </Styled.TabButton>
+          </Styled.TabLi>
+          <Styled.TabLi>
+            <Styled.TabButton
               onClick={() => clickHandler('Popular')}
               selected={tabs === 'Popular'}
               color={'rgb(123, 123, 123)'}
             >
               Popular
-            </TabButton>
-          </TabLi>
-        </TabUl>
+            </Styled.TabButton>
+          </Styled.TabLi>
+        </Styled.TabUl>
 
         {tabs && (
           <>
@@ -292,7 +205,7 @@ const Community = () => {
                     `${item.title} [${item.Post_comments.length.toString()}]`,
                     `${item.User?.nickname}`,
                     // item.User?.rank,
-                    <RankIcon key={item.id} src={`/${item.User?.rank}.png`} alt="/0.png" />,
+                    <Styled.RankIcon key={item.id} src={`/${item.User?.rank}.png`} alt="/0.png" />,
                     // item.created_ats.getMonth(),
                     // (new Date() - item.created_at).toString(),
                     item.created_at.toDateString(),
@@ -321,8 +234,8 @@ const Community = () => {
             />
           </>
         )}
-      </CommunityLayout>
-      <RankContainer>
+      </Styled.CommunityLayout>
+      <Styled.RankContainer>
         <thead>
           <tr>
             <th>Rank</th>
@@ -333,7 +246,7 @@ const Community = () => {
             <tr key={rank.id}>
               <td>{rank.ranking}</td>
               <td>
-                <RankIcon key={rank.id} src={`/${rank.ranking}.png`} alt="/0.png" />
+                <Styled.RankIcon key={rank.id} src={`/${rank.ranking}.png`} alt="/0.png" />
               </td>
               {/* <span>id:{rank.id} </span> */}
               <td>User{rank.user_id - 1} | </td>
@@ -342,9 +255,10 @@ const Community = () => {
             </tr>
           ))}
         </tbody>
-      </RankContainer>
+      </Styled.RankContainer>
     </>
   );
 };
 
 export default Community;
+// 351

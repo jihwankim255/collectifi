@@ -5,7 +5,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import {data} from '../data/data';
 import {WriteButton, WriteForm, WriteInput, WriteLabel, WriteTextarea} from './WritePage';
-import {PostsAttributes, RankIcon} from './CommunityPage';
+import {PostsAttributes} from './CommunityPage';
 import {faThumbsUp, faThumbsDown, faEdit} from '@fortawesome/free-regular-svg-icons';
 import {faCrown, faTrash, faCheck, faClose} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';

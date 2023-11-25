@@ -5,7 +5,8 @@ import axios from 'axios';
 import styled from 'styled-components';
 import {data} from '../data/data';
 import {WriteButton, WriteForm, WriteInput, WriteLabel, WriteTextarea} from './WritePage';
-import {PostsAttributes, RankIcon} from './CommunityPage';
+import {PostsAttributes} from './CommunityPage/index';
+import Styled from './CommunityPage/Community.styled';
 import {faThumbsUp, faThumbsDown, faEdit} from '@fortawesome/free-regular-svg-icons';
 import {faCrown, faTrash, faCheck, faClose} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -492,7 +493,7 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
           <WriterDate>
             <Writer>
               <div>Writer: {post.User?.nickname}</div>
-              <RankIcon src={`/${post.User?.rank}.png`} alt="/0.png" />
+              <Styled.RankIcon src={`/${post.User?.rank}.png`} alt="/0.png" />
             </Writer>
             <DateS>
               <div>View: {post.views}</div>
@@ -528,7 +529,7 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
                     <NickRank>
                       <div>{comment.User.nickname}</div>
                       {/* <CrownIcon icon={faCrown} /> */}
-                      <RankIcon src={`/${comment.User?.rank}.png`} alt="/0.png" />
+                      <Styled.RankIcon src={`/${comment.User?.rank}.png`} alt="/0.png" />
                     </NickRank>
 
                     {/* 댓쓴이와  로그인 계정이 동일한가? */}
