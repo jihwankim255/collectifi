@@ -1,21 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {Suspense} from 'react';
-import {ErrorBoundary} from 'react-error-boundary';
-import Button from '../components/UI/Button';
-import Tab from '../components/UI/Tab';
-import Modal from '../components/UI/Modal';
-import ModalAlert from '../components/UI/ModalAlert';
-import Input from '../components/UI/Input';
-import Market from '../components/market/Market';
-import MyPage from '../components/mypage/MyPage';
-import CardDetail from '../components/market/CardDetail';
 import styled, {keyframes} from 'styled-components';
-import {toast} from 'react-toastify';
 import {TypeAnimation} from 'react-type-animation';
 import CountUp from 'react-countup';
-import {useNavigate} from 'react-router-dom';
-import ScrollTrigger from 'react-scroll-trigger/types';
-import {useAnimation, useScroll} from 'framer-motion';
+
 const MainLayout = styled.div`
   width: 100%;
   height: 100%;
@@ -235,143 +221,27 @@ const Balloon2 = styled.img`
   left: 0;
   width: 100%;
 `;
-const MainPage = () => {
-  const navigate = useNavigate();
-  const [error, setError] = useState<any>(null);
-  const [error2, setError2] = useState<any>(null);
-  const [error3, setError3] = useState<any>(null);
-  const errorHandler = () => {
-    setError(null);
-    setError2(null);
-    setError3(null);
-  };
-  const errorHandler2 = () => {
-    setError(null);
-    setError2(null);
-    setError3(null);
-  };
-  const Toast = () => {
-    toast('first notification');
-  };
-  const headerAnimation = useAnimation();
-  const {scrollY} = useScroll();
-  useEffect(() => {
-    scrollY.onChange(() => {
-      if (scrollY.get() > 1350) {
-        // headerAnimation.start('scroll');
-        // setDarkMode(false);
-        setCounterOn(true);
-      } else {
-        // headerAnimation.start('top');
-        // setDarkMode(true);
-      }
-    });
-  }, [scrollY, headerAnimation]);
-  const [counterOn, setCounterOn] = useState(false);
-  return (
-    <MainLayout>
-      {/* <Button
-        onClick={() => {
-          setError('asd');
-        }}
-      >
-        MODAL1
-      </Button>
-      <Button
-        onClick={() => {
-          setError2('asd');
-        }}
-      >
-        MODAL2
-      </Button>
-      <Button
-        onClick={() => {
-          setError3('asd');
-        }}
-      >
-        MODAL3
-      </Button>
 
-      {error && <ModalAlert title={'title'} message={'message'} onConfirm={errorHandler} />}
-      {error2 && (
-        <ModalAlert
-          title={'title'}
-          message={'message'}
-          onConfirm={errorHandler}
-          onConfirm2={errorHandler2}
-        />
-      )}
-      {error3 && (
-        <Modal onConfirm={errorHandler}>
-          <div>test1</div>
-          <div>test1</div>
-          <div>test1</div>
-          <div>test1</div>
-        </Modal>
-      )}
-
-      <label htmlFor="input" />
-      <Input id="input" placeholder="INPUT" />
-
-      <Tab title={['TEST1', 'TEST2', 'TEST3']}>
-        <div>test1</div>
-        <div>test2</div>
-        <div>test3</div>
-      </Tab>
-      <ErrorBoundary fallback={<div>Error!</div>}>
-        <Suspense>
-          <Market />
-          <MyPage />
-          <CardDetail />
-        </Suspense>
-      </ErrorBoundary> */}
-
-      <MainWrapper>
-        <MainImg src="/bg3.png" />
-        <MainBack />
-        <MainButton onClick={() => navigate('/draw')}>Get Player NFT</MainButton>
-        <MainTypeAnimation
-          sequence={[
-            'Own your NFT', // Types 'One'
-            2000, // Waits 1s
-            'Own your Player', // Deletes 'One' and types 'Two'
-            2000, // Waits 2s
-            'Upgrade your Player', // Types 'Three' without deleting 'Two'
-            1800,
-            () => {
-              console.log('Sequence completed'); // Place optional callbacks anywhere in the array
-            },
-          ]}
-          wrapper="span"
-          cursor={true}
-          repeat={Infinity}
-          style={{display: 'inline-block'}}
-        />
-      </MainWrapper>
-
-      <Section>
-        <Section2Image src="/trophy.png" />
-        <FloatingButton onClick={() => navigate('/community')}></FloatingButton>
-      </Section>
-
-      <Section>
-        <UpgradeBack src="/upgrade_background.jpg" />
-        <FloatingDiv1>
-          <Balloon1 src="/balloon1.png" />
-        </FloatingDiv1>
-        <FloatingDiv2>
-          <Balloon1 src="/balloon2.png" />
-        </FloatingDiv2>
-        <FloatingDiv3>
-          <Balloon1 src="/balloon3.png" />
-        </FloatingDiv3>
-
-        {/* <ScrollTrigger onEnter={() => setCounterOn(true)} onExit={() => setCounterOn(false)}> */}
-        {counterOn && <CountUpS start={0} end={25} duration={5} delay={0} />}
-        {/* </ScrollTrigger> */}
-      </Section>
-    </MainLayout>
-  );
+export default {
+  MainLayout,
+  MainWrapper,
+  MainImg,
+  MainBack,
+  MainButton,
+  MainTypeAnimation,
+  Section,
+  Section2Image,
+  Section3Images,
+  Section3Image,
+  floatAnimation1,
+  floatAnimation2,
+  floatAnimation3,
+  FloatingButton,
+  FloatingDiv1,
+  FloatingDiv2,
+  FloatingDiv3,
+  CountUpS,
+  UpgradeBack,
+  Balloon1,
+  Balloon2,
 };
-
-export default MainPage;
