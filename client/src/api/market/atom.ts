@@ -130,7 +130,7 @@ export const getSellCardListQuery = selector({
   key: 'GetSellCardListQuery',
   get: async ({get}) => {
     const sellCardLst = await get(sellCardQuery);
-    return sellCardLst.data.data;
+    return sellCardLst.data;
   },
 });
 

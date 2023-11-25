@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled, {keyframes} from 'styled-components';
-import {DummyComponent, Layout} from '../Styles';
+import {Layout} from '../Styles';
 import Button from '../components/UI/Button';
 import Modal from '../components/UI/Modal';
 import axios from 'axios';

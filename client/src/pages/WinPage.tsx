@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {DummyComponent} from '../Styles';
 import styled from 'styled-components';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
@@ -193,7 +192,7 @@ const WinPage = () => {
 
   return (
     <WinLayout>
-      <PageTitle title='BET ON MATCHS'/>
+      <PageTitle title="BET ON MATCHS" />
       <BigBox>
         <MatchDate>29th April</MatchDate>
         <Timer />

@@ -14,10 +14,6 @@ export const Layout = styled.div`
     max-width: 93%;
   }
 `;
-// 테스트용 컴포넌트
-export const DummyComponent = styled.div`
-  height: 150px;
-`;
 
 // 글로벌 스타일
 const GlobalStyle = createGlobalStyle`

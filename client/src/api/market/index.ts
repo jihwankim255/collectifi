@@ -1,18 +1,11 @@
 import axios from 'axios';
+import axiosInstance from '../core';
 import {ISCONNECT} from '../../atom';
 import {sellCard as sellCardData} from '../../data/market';
 
 export const sellCard = async () => {
-  console.log('sellcard');
   if (!ISCONNECT) return sellCardData;
-  const options = {
-    method: 'GET',
-    url: `${process.env.REACT_APP_BASE_URL}/market`,
-    headers: {accept: 'application/json'},
-    withCredentials: true,
-  };
-
-  return await axios(options);
+  return await axiosInstance('/market');
 };
 
 export const cardById = async (id: number) => {

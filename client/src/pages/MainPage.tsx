@@ -9,7 +9,6 @@ import Input from '../components/UI/Input';
 import Market from '../components/market/Market';
 import MyPage from '../components/mypage/MyPage';
 import CardDetail from '../components/market/CardDetail';
-import {DummyComponent} from '../Styles';
 import styled, {keyframes} from 'styled-components';
 import {toast} from 'react-toastify';
 import {TypeAnimation} from 'react-type-animation';
