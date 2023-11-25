@@ -274,7 +274,7 @@ const Header = ({toggle}: PageLayoutProps) => {
         //setAccount(res[0]);
         // 백엔드로 로그인 요청
         axios
-          .post('http://localhost:8000/login', {address: res[0]}, {withCredentials: true})
+          .post(`${process.env.BASE_URL}/login`, {address: res[0]}, {withCredentials: true})
           .then(res => {
             console.log('login_post success: ', res);
             if (!res.data.data) return;

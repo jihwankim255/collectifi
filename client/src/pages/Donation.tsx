@@ -231,7 +231,7 @@ const Donation = () => {
 
   const handleClickTwo = async (e: any) => {
     const response = await axios.post(
-      'http://localhost:8000/donation',
+      `${process.env.BASE_URL}/donation`,
       {amount},
       {withCredentials: true},
     );
@@ -246,7 +246,7 @@ const Donation = () => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:8000/donation', {withCredentials: true}).then((res: any) => {
+    axios.get(`${process.env.BASE_URL}/donation`, {withCredentials: true}).then((res: any) => {
       setInfos(res.data.data.donations);
       console.log(res.data.data.donations);
     });
@@ -256,7 +256,7 @@ const Donation = () => {
   return (
     <Layout>
       <TopBox>
-        <PageTitle title='DONATIONS'/>
+        <PageTitle title="DONATIONS" />
       </TopBox>
       <MiddleBox>
         {infos ? (

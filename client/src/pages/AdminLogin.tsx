@@ -77,7 +77,7 @@ const AdminLogin = () => {
   const onSubmit = async (data: any) => {
     const {username, password} = data;
     const response = await axios.post(
-      'http://localhost:8000/admin/login',
+      `${process.env.BASE_URL}/admin/login`,
       {username, password},
       {withCredentials: true},
     );
