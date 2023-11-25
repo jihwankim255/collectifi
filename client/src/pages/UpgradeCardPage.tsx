@@ -10,7 +10,7 @@ import {useNavigate} from 'react-router-dom';
 import {AnimatePresence} from 'framer-motion';
 import {toast} from 'react-toastify';
 import Button from '../components/UI/Button';
-import {userId} from '../modules/atom';
+import {userId} from '../atom';
 import {useRecoilValue} from 'recoil';
 const AppContainer = styled.div`
   background-color: #000;

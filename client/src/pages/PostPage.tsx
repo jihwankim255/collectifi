@@ -10,7 +10,7 @@ import {faThumbsUp, faThumbsDown, faEdit} from '@fortawesome/free-regular-svg-ic
 import {faCrown, faTrash, faCheck, faClose} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {toast} from 'react-toastify';
-import {userId} from '../modules/atom';
+import {userId} from '../atom';
 import {useRecoilValue} from 'recoil';
 export interface PostProps {
   setCurrentPage: (value: number) => void;

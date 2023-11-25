@@ -1,5 +1,5 @@
 import {atom, selector} from 'recoil';
-import {checkLogin, logout} from '../api/account';
+import {checkLogin, logout} from './api/account';
 
 export const ISCONNECT = true;
 

@@ -18,9 +18,9 @@ import {
   getSellRegiQuery,
   getBuyApproveQuery,
   buyCardQuery,
-} from '../../modules/market/atom';
-import {userAddr, userAmount} from '../../modules/atom';
-import {tx} from '../../modules/market/type';
+} from '../../api/market/atom';
+import {userAddr, userAmount} from '../../atom';
+import {tx} from '../../api/market/type';
 
 import {sendTx} from '../../api/wallet';
 import PlayerCard, {Glow} from '../UI/PlayerCard';

@@ -16,12 +16,12 @@ import {
   galleryInfoQuery,
   withdrawQuery,
   updateWithdrawQuery,
-} from '../../modules/mypage/atom';
-import {userNickname, userAmount, userAddr, userId} from '../../modules/atom';
-import {updateWithdraw} from '../../modules/mypage/api';
+} from '../../api/mypage/atom';
+import {userNickname, userAmount, userAddr, userId} from '../../atom';
+import {updateWithdraw} from '../../api/mypage';
 import {sendTx} from '../../api/wallet';
 import {nft, post} from '../../types';
-import {myGallery, myCard} from '../../modules/mypage/type';
+import {myGallery, myCard} from '../../api/mypage/type';
 import PageTitle from '../UI/PageTitle';
 import Tab from '../UI/Tab';
 import CardList from '../market/CardList';

@@ -3,10 +3,10 @@ import styled, {css} from 'styled-components';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import {useRecoilValue, useSetRecoilState, useRecoilCallback} from 'recoil';
-import {stakeQuery, addCardRegiQuery} from '../../modules/gallery/atom';
-import {userAddr, userAmount} from '../../modules/atom';
+import {stakeQuery, addCardRegiQuery} from '../../api/gallery/atom';
+import {userAddr, userAmount} from '../../atom';
 import {sendTx} from '../../api/wallet';
-import {stakeData} from '../../modules/gallery/type';
+import {stakeData} from '../../api/gallery/type';
 import ModalAlert from '../UI/ModalAlert';
 import Button from '../UI/Button';
 
@@ -71,7 +71,7 @@ const RegiForm: React.FC<Props> = props => {
     if (!stakeQ) {
       return;
     }
-    const stakeQData = stakeQ.data.data;
+    const stakeQData = stakeQ.data;
     console.log(stakeQData);
     const approveResult = await sendTx(userAddress, stakeQData.erc721ca, stakeQData.approve);
     console.log(approveResult);

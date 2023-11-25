@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ISCONNECT} from '../atom';
+import {ISCONNECT} from '../../atom';
 import {sellCard as sellCardData} from '../../data/market';
 
 export const sellCard = async () => {

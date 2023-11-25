@@ -11,15 +11,8 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import Dropdown from './Dropdown';
 import axios from 'axios';
 import {useRecoilValue, useRecoilCallback, useRecoilRefresher_UNSTABLE} from 'recoil';
-import {
-  userAddr,
-  userId,
-  userNickname,
-  userAmount,
-  userReferral,
-  logoutQuery,
-} from '../modules/atom';
-import {getUserQuery} from '../modules/mypage/atom';
+import {userAddr, userId, userNickname, userAmount, userReferral, logoutQuery} from '../atom';
+import {getUserQuery} from '../api/mypage/atom';
 import MyInfo from './MyInfo';
 import {darken} from 'polished';
 import Cookies from 'js-cookie';

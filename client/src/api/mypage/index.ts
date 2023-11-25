@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {ISCONNECT} from '../atom';
+import {ISCONNECT} from '../../atom';
 import {userInfo as userInfoData} from '../../data/mypage';
 
 export const userInfo = async (id: number) => {

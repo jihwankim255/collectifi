@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import { useRecoilValue, useRecoilRefresher_UNSTABLE } from 'recoil';
-import { addCardByGallIdQuery } from '../../modules/gallery/atom';
-import { addCard } from '../../modules/gallery/type';
+import {useRecoilValue, useRecoilRefresher_UNSTABLE} from 'recoil';
+import {addCardByGallIdQuery} from '../../api/gallery/atom';
+import {addCard} from '../../api/gallery/type';
 
 import CardList from '../market/CardList';
 import CardListItem from '../market/CardListItem';
@@ -14,56 +14,57 @@ type Props = {
   endDate: string;
   galleryRefresh: () => void;
   addCardRefresh: () => void;
-}
+};
 
-const GalleryRegi: React.FC<Props> = (props) => {
-  const [selectedIndex, setSelectedIndex] = useState(-1);  
-  const [selectedTokenId, setSelectedTokenId] = useState(0); 
-  const addCard = useRecoilValue(addCardByGallIdQuery(props.gallId));  
-  
-  console.log("addCard", addCard)
+const GalleryRegi: React.FC<Props> = props => {
+  const [selectedIndex, setSelectedIndex] = useState(-1);
+  const [selectedTokenId, setSelectedTokenId] = useState(0);
+  const addCard = useRecoilValue(addCardByGallIdQuery(props.gallId));
+
+  console.log('addCard', addCard);
 
   const handleCardClick = (index: number, token_id: number) => {
     setSelectedIndex(index);
     setSelectedTokenId(token_id);
-  }
+  };
 
-  if(!addCard) return <></>;
-  const addCardData = addCard.data.data.myNfts;
+  if (!addCard) return <></>;
+  const addCardData = addCard.data.myNfts;
 
   return (
-    <GalleryRegiLayout>      
+    <GalleryRegiLayout>
       <div>
-        <CardList itemWidth={"200px"}>
+        <CardList itemWidth={'200px'}>
           {addCardData.map((el: addCard, i: number) => {
             return (
-              <CardListItem 
+              <CardListItem
                 key={i}
                 onClick={() => handleCardClick(i, el.token_id)}
                 isSelected={i === selectedIndex}
                 isPreventDefault={true}
               >
-                <PlayerCard 
+                <PlayerCard
                   imgSrc={el.img_url}
                   //cardWidth={cardWidth}
                   //glow={Glow.orange}
                 />
               </CardListItem>
-            )
-          })}  
+            );
+          })}
         </CardList>
       </div>
-      <div className='RegiForm'>
-        <RegiCont 
+      <div className="RegiForm">
+        <RegiCont
           gallId={props.gallId}
-          selectedTokenId={selectedTokenId} 
+          selectedTokenId={selectedTokenId}
           endDate={props.endDate}
           addCardRefresh={props.addCardRefresh}
           galleryRefresh={props.galleryRefresh}
         />
       </div>
-    </GalleryRegiLayout>)
-}
+    </GalleryRegiLayout>
+  );
+};
 
 export default GalleryRegi;
 
@@ -74,4 +75,4 @@ const GalleryRegiLayout = styled.div`
   display: grid;
   grid-template-columns: 7fr 3fr;
   gap: 40px;
-`
+`;

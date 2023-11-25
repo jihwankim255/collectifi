@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components';
 import {useRecoilValue, useRecoilRefresher_UNSTABLE} from 'recoil';
-import {getSellCardListQuery} from '../../modules/market/atom';
+import {getSellCardListQuery} from '../../api/market/atom';
 
 import {nft} from '../../types';
 import PageTitle from '../UI/PageTitle';

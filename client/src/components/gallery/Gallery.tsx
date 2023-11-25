@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { selectedGallery, galleriesQuery } from '../../modules/gallery/atom';
-import { gallery } from '../../modules/gallery/type';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
+import {selectedGallery, galleriesQuery} from '../../api/gallery/atom';
+import {gallery} from '../../api/gallery/type';
 
 import PageTitle from '../UI/PageTitle';
 import BoardList from '../UI/BoardList';
@@ -14,23 +14,23 @@ const Gallery = () => {
   const setSelectedGallery = useSetRecoilState(selectedGallery);
 
   const handleClick = (index: number) => {
-    if(!galleries) return;
-    const gallData = galleries.data.data.gallerys[index];
+    if (!galleries) return;
+    const gallData = galleries.data.gallerys[index];
     setSelectedGallery(gallData);
-  }
+  };
 
   useEffect(() => {
     return () => {
       //
-    }    
+    };
   }, []);
 
-  if(!galleries) return <></>
-  const gallData = galleries.data.data.gallerys;
-  console.log("gal", galleries);
+  if (!galleries) return <></>;
+  const gallData = galleries.data.gallerys;
+  console.log('gal', galleries);
   return (
     <GalleryLayout>
-      <PageTitle title='GALLERY'/>
+      <PageTitle title="GALLERY" />
       <BoardList
         key={2}
         title={
@@ -41,7 +41,11 @@ const Gallery = () => {
         }
       >
         {gallData.map((el: gallery, i: number) => {
-          const img = <div className='gallimg-wrap'><img src={el.img_url} alt='gallery'/></div>
+          const img = (
+            <div className="gallimg-wrap">
+              <img src={el.img_url} alt="gallery" />
+            </div>
+          );
           const listItem = [img, el.tags, el.title, el.date];
           return (
             <BoardListItem
@@ -54,8 +58,9 @@ const Gallery = () => {
           );
         })}
       </BoardList>
-    </GalleryLayout>)
-}
+    </GalleryLayout>
+  );
+};
 
 export default Gallery;
 
@@ -69,6 +74,6 @@ const GalleryLayout = styled.div`
     max-height: 140px;
     img {
       width: 100%;
-    }   
+    }
   }
-`
+`;
