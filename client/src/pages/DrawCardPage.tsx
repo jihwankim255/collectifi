@@ -194,7 +194,7 @@ const DrawCardPage = () => {
 
     if (confirm('정말 구매하시겠습니까?')) {
       axios
-        .post(`${process.env.BASE_URL}/drawing`, {card_pack: e}, {withCredentials: true})
+        .post(`${process.env.REACT_APP_BASE_URL}/drawing`, {card_pack: e}, {withCredentials: true})
         .then((res: any) => {
           setCard(res.data.data.mintedNft);
           toast.success('Successfully Minted your Nft!🎉');
@@ -247,7 +247,7 @@ const DrawCardPage = () => {
             // });
             axios
               .post(
-                `${process.env.BASE_URL}/drawing`,
+                `${process.env.REACT_APP_BASE_URL}/drawing`,
                 {card_pack: selectedPack},
                 {withCredentials: true},
               )

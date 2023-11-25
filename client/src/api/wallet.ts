@@ -23,7 +23,7 @@ export const logout = async () => {
   //if(!ISCONNECT) return sellCardData;
   const options = {
     method: 'POST',
-    url: `${process.env.BASE_URL}/logout`,
+    url: `${process.env.REACT_APP_BASE_URL}/logout`,
     headers: {accept: 'application/json'},
     withCredentials: true,
     data: {},

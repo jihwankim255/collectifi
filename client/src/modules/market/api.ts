@@ -7,7 +7,7 @@ export const sellCard = async () => {
   if (!ISCONNECT) return sellCardData;
   const options = {
     method: 'GET',
-    url: `${process.env.BASE_URL}/market`,
+    url: `${process.env.REACT_APP_BASE_URL}/market`,
     headers: {accept: 'application/json'},
     withCredentials: true,
   };
@@ -22,7 +22,7 @@ export const cardById = async (id: number) => {
   }
   const options = {
     method: 'GET',
-    url: `${process.env.BASE_URL}/market/nft/${id}`,
+    url: `${process.env.REACT_APP_BASE_URL}/market/nft/${id}`,
     headers: {accept: 'application/json'},
     withCredentials: true,
   };
@@ -33,7 +33,7 @@ export const cardById = async (id: number) => {
 export const txById = async (id: number) => {
   const options = {
     method: 'GET',
-    url: `${process.env.BASE_URL}/market/nft/record/${id}`,
+    url: `${process.env.REACT_APP_BASE_URL}/market/nft/record/${id}`,
     headers: {accept: 'application/json'},
     withCredentials: true,
   };
@@ -45,7 +45,7 @@ export const sellApprove = async (id: number) => {
   //if(!ISCONNECT) return sellCardData;
   const options = {
     method: 'GET',
-    url: `${process.env.BASE_URL}/market/nftapprove/${id}`,
+    url: `${process.env.REACT_APP_BASE_URL}/market/nftapprove/${id}`,
     headers: {accept: 'application/json'},
     withCredentials: true,
   };
@@ -58,7 +58,7 @@ export const sellRegi = async (id: number, price: number) => {
   console.log('sellRegi', id, price);
   const options = {
     method: 'POST',
-    url: `${process.env.BASE_URL}/market/sell`,
+    url: `${process.env.REACT_APP_BASE_URL}/market/sell`,
     headers: {accept: 'application/json'},
     withCredentials: true,
     data: {
@@ -80,7 +80,7 @@ export const buyApprove = async (token_amount: number) => {
   //if(!ISCONNECT) return sellCardData;
   const options = {
     method: 'GET',
-    url: `${process.env.BASE_URL}/market/tokenapprove/${token_amount}`,
+    url: `${process.env.REACT_APP_BASE_URL}/market/tokenapprove/${token_amount}`,
     headers: {accept: 'application/json'},
     withCredentials: true,
   };
@@ -92,7 +92,7 @@ export const buyCard = async (token_id: number, user_id: number, price: number) 
   //if(!ISCONNECT) return sellCardData;
   const options = {
     method: 'POST',
-    url: `${process.env.BASE_URL}/market/buy`,
+    url: `${process.env.REACT_APP_BASE_URL}/market/buy`,
     headers: {accept: 'application/json'},
     withCredentials: true,
     data: {

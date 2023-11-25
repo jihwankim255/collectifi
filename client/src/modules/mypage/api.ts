@@ -7,7 +7,7 @@ export const userInfo = async (id: number) => {
   if (!ISCONNECT) return userInfoData;
   const options = {
     method: 'GET',
-    url: `${process.env.BASE_URL}/user/${id}`,
+    url: `${process.env.REACT_APP_BASE_URL}/user/${id}`,
     headers: {accept: 'application/json'},
     withCredentials: true,
   };
@@ -28,7 +28,7 @@ export const editNickname = async (nickname: string) => {
   //if(!ISCONNECT) return sellCardData;
   const options = {
     method: 'POST',
-    url: `${process.env.BASE_URL}/user/edit`,
+    url: `${process.env.REACT_APP_BASE_URL}/user/edit`,
     headers: {accept: 'application/json'},
     withCredentials: true,
     data: {
@@ -49,7 +49,7 @@ export const editReferral = async (address: string) => {
   //if(!ISCONNECT) return sellCardData;
   const options = {
     method: 'POST',
-    url: `${process.env.BASE_URL}/user/referral`,
+    url: `${process.env.REACT_APP_BASE_URL}/user/referral`,
     headers: {accept: 'application/json'},
     withCredentials: true,
     data: {
@@ -70,7 +70,7 @@ export const galleryInfo = async (id: number) => {
   //console.log("userInfo", id)
   const options = {
     method: 'GET',
-    url: `${process.env.BASE_URL}/gallery/mypage/${id}`,
+    url: `${process.env.REACT_APP_BASE_URL}/gallery/mypage/${id}`,
     headers: {accept: 'application/json'},
     withCredentials: true,
   };
@@ -88,7 +88,7 @@ export const withdraw = async (id: number) => {
   //if(!ISCONNECT) return sellCardData;
   const options = {
     method: 'GET',
-    url: `${process.env.BASE_URL}/gallery/withdraw/${id}/`,
+    url: `${process.env.REACT_APP_BASE_URL}/gallery/withdraw/${id}/`,
     headers: {accept: 'application/json'},
     withCredentials: true,
   };
@@ -106,7 +106,7 @@ export const updateWithdraw = async (gallId: number, nftId: number) => {
   //if(!ISCONNECT) return sellCardData;
   const options = {
     method: 'POST',
-    url: `${process.env.BASE_URL}/gallery/withdraw`,
+    url: `${process.env.REACT_APP_BASE_URL}/gallery/withdraw`,
     headers: {accept: 'application/json'},
     withCredentials: true,
     data: {

@@ -231,7 +231,7 @@ const Donation = () => {
 
   const handleClickTwo = async (e: any) => {
     const response = await axios.post(
-      `${process.env.BASE_URL}/donation`,
+      `${process.env.REACT_APP_BASE_URL}/donation`,
       {amount},
       {withCredentials: true},
     );
@@ -246,10 +246,12 @@ const Donation = () => {
   };
 
   useEffect(() => {
-    axios.get(`${process.env.BASE_URL}/donation`, {withCredentials: true}).then((res: any) => {
-      setInfos(res.data.data.donations);
-      console.log(res.data.data.donations);
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/donation`, {withCredentials: true})
+      .then((res: any) => {
+        setInfos(res.data.data.donations);
+        console.log(res.data.data.donations);
+      });
 
     console.log('hi');
   }, []);

@@ -4,7 +4,7 @@ export const galleries = async () => {
   //if(!ISCONNECT) return userInfoData;
   const options = {
     method: 'GET',
-    url: `${process.env.BASE_URL}/gallery/`,
+    url: `${process.env.REACT_APP_BASE_URL}/gallery/`,
     headers: {accept: 'application/json'},
     withCredentials: true,
   };
@@ -22,7 +22,7 @@ export const cardByGallId = async (id: number) => {
   //if(!ISCONNECT) return userInfoData;
   const options = {
     method: 'GET',
-    url: `${process.env.BASE_URL}/gallery/${id}`,
+    url: `${process.env.REACT_APP_BASE_URL}/gallery/${id}`,
     headers: {accept: 'application/json'},
     withCredentials: true,
   };
@@ -40,7 +40,7 @@ export const addCardByGallId = async (id: number) => {
   //if(!ISCONNECT) return userInfoData;
   const options = {
     method: 'GET',
-    url: `${process.env.BASE_URL}/gallery/nft/${id}`,
+    url: `${process.env.REACT_APP_BASE_URL}/gallery/nft/${id}`,
     headers: {accept: 'application/json'},
     withCredentials: true,
   };
@@ -58,7 +58,7 @@ export const stake = async (id: number, unlockTime: number) => {
   //if(!ISCONNECT) return sellCardData;
   const options = {
     method: 'GET',
-    url: `${process.env.BASE_URL}/gallery/stake/${id}/${unlockTime}`,
+    url: `${process.env.REACT_APP_BASE_URL}/gallery/stake/${id}/${unlockTime}`,
     headers: {accept: 'application/json'},
     withCredentials: true,
   };
@@ -76,7 +76,7 @@ export const addCardRegi = async (gallery_id: number, nft_id: number, nft_end_ti
   //if(!ISCONNECT) return sellCardData;
   const options = {
     method: 'POST',
-    url: `${process.env.BASE_URL}/gallery/nft`,
+    url: `${process.env.REACT_APP_BASE_URL}/gallery/nft`,
     headers: {accept: 'application/json'},
     withCredentials: true,
     data: {

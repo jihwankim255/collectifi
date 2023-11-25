@@ -140,7 +140,7 @@ const Community = () => {
     // 모든 게시글을 불러옴
 
     axios
-      .get(`${process.env.BASE_URL}/community`, {params})
+      .get(`${process.env.REACT_APP_BASE_URL}/community`, {params})
       .then(response => {
         console.log('모든 게시글: ', response);
         setPosts(
@@ -215,7 +215,7 @@ const Community = () => {
   const [ranks, setRanks] = useState<IRank[]>([]);
   useEffect(() => {
     axios
-      .get(`${process.env.BASE_URL}/rank`, {withCredentials: true})
+      .get(`${process.env.REACT_APP_BASE_URL}/rank`, {withCredentials: true})
       .then(response => {
         console.log('모든 랭크: ', response.data.data.ranks);
         setRanks([...response.data.data.ranks]);
