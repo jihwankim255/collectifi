@@ -1,20 +1,16 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
-import styled from 'styled-components';
-
-import {Sidebar, Menu, MenuItem, SubMenu, MenuItemProps} from 'react-pro-sidebar';
-import ReactPaginate from 'react-js-pagination';
+import Styled from './Admin.styled';
+import {Sidebar, Menu, MenuItem, SubMenu} from 'react-pro-sidebar';
 import {faUser, faComment, faEdit, faMessage, faListAlt} from '@fortawesome/free-regular-svg-icons';
 import {faList, faTrash, faBan} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import BoardList from '../../components/UI/BoardList';
+
 import BoardTitleItem from '../../components/UI/BoardTitleItem';
-import BoardListItem from '../../components/UI/BoardListItem';
+
 import Pagination from '../../components/UI/Pagination';
 import {toast} from 'react-toastify';
-interface MenuItemSProps {
-  active: boolean;
-}
+
 interface IUsers {
   address: string;
   id: number;
@@ -56,127 +52,6 @@ interface IWins {
   drawToken: number;
   totalToken: number;
 }
-const Container = styled.div`
-  /* background-color: grey; */
-  padding: 50px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-`;
-
-const Layout = styled.div`
-  /* background-color: #4343f4; */
-  padding: 50px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const TopBar = styled.div`
-  /* background-color: brown; */
-  display: flex;
-  width: 100%;
-  font-size: 50px;
-  font-weight: 600;
-`;
-
-const MenuBox = styled.div`
-  display: flex;
-  background-color: aquamarine;
-  width: 300px;
-  flex-direction: column;
-
-  align-items: center;
-  height: 100%;
-`;
-
-const ContentBox = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 30px;
-  width: 100%;
-  height: 100%;
-  /* background: green; */
-`;
-
-const Content = styled.div`
-  background-color: red;
-  height: 100%;
-  width: 100%;
-`;
-
-const MenuItemS = styled(MenuItem)<MenuItemSProps>`
-  background: ${props => (props.active ? '#bdbdbd' : 'white')};
-`;
-const PostDetail = styled.div<{active: boolean}>`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 5px 10px 5px 10px;
-  padding: 25px 30px 30px 40px;
-  display: ${props => (props.active ? '' : 'none')};
-`;
-const TrashIcon = styled(FontAwesomeIcon)`
-  margin: 15px;
-  margin-right: 50px;
-  padding: 20px;
-  cursor: pointer;
-`;
-const CommentDetail = styled.div<{active: boolean}>`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 5px 10px 5px 10px;
-  padding: 25px 30px 30px 40px;
-  display: ${props => (props.active ? '' : 'none')};
-`;
-const WinDetail = styled.div<{active: boolean}>`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px 10px 5px 10px;
-  padding: 25px 30px 30px 40px;
-  display: ${props => (props.active ? '' : 'none')};
-`;
-
-const WinBox = styled.div`
-  background-color: #fd115c;
-  padding: 10px;
-  font-size: 30px;
-  color: white;
-  font-weight: 600;
-  margin-right: 20px;
-  border-radius: 10px;
-
-  :hover {
-    cursor: pointer;
-  }
-`;
-
-const BanIcon = styled(FontAwesomeIcon)`
-  cursor: pointer;
-`;
-
-const BoardListAdmin = styled(BoardList)`
-  width: 100%;
-  height: 100%;
-  /* background-color: brown; */
-`;
-
-const BoardListItemAdmin = styled(BoardListItem)`
-  width: 100%;
-  height: 100%;
-  /* background-color: yellow; */
-`;
 
 const Admin = () => {
   // 공통
@@ -437,38 +312,38 @@ const Admin = () => {
   };
 
   return (
-    <Layout>
-      <TopBar>Collectifi Admin</TopBar>
-      <Container>
+    <Styled.Layout>
+      <Styled.TopBar>Collectifi Admin</Styled.TopBar>
+      <Styled.Container>
         <Sidebar style={{fontSize: 25, fontWeight: 600}}>
           <Menu>
             <SubMenu label="Database">
-              <MenuItemS active={menu === 0} onClick={() => setMenu(0)}>
+              <Styled.MenuItemS active={menu === 0} onClick={() => setMenu(0)}>
                 <FontAwesomeIcon icon={faUser} style={{marginRight: 10}} />
                 Users
-              </MenuItemS>
-              <MenuItemS active={menu === 1} onClick={() => setMenu(1)}>
+              </Styled.MenuItemS>
+              <Styled.MenuItemS active={menu === 1} onClick={() => setMenu(1)}>
                 <FontAwesomeIcon icon={faList} style={{marginRight: 10}} />
                 Posts
-              </MenuItemS>
-              <MenuItemS active={menu === 2} onClick={() => setMenu(2)}>
+              </Styled.MenuItemS>
+              <Styled.MenuItemS active={menu === 2} onClick={() => setMenu(2)}>
                 <FontAwesomeIcon icon={faMessage} style={{marginRight: 10}} />
                 Comments
-              </MenuItemS>
-              <MenuItemS active={menu === 3} onClick={() => setMenu(3)}>
+              </Styled.MenuItemS>
+              <Styled.MenuItemS active={menu === 3} onClick={() => setMenu(3)}>
                 <FontAwesomeIcon icon={faBan} style={{marginRight: 10}} />
                 BlackLists
-              </MenuItemS>
+              </Styled.MenuItemS>
             </SubMenu>
-            <MenuItemS active={menu === 4} onClick={() => setMenu(4)}>
+            <Styled.MenuItemS active={menu === 4} onClick={() => setMenu(4)}>
               Win
-            </MenuItemS>
+            </Styled.MenuItemS>
           </Menu>
         </Sidebar>
 
         {menu === 0 && (
-          <ContentBox>
-            <BoardListAdmin
+          <Styled.ContentBox>
+            <Styled.BoardListAdmin
               title={
                 <BoardTitleItem
                   title={[
@@ -493,10 +368,14 @@ const Admin = () => {
                     user.rank,
                     user.referral || 'None',
                     user.token_amount,
-                    <BanIcon onClick={() => banUser(user.address)} key={user.id} icon={faBan} />,
+                    <Styled.BanIcon
+                      onClick={() => banUser(user.address)}
+                      key={user.id}
+                      icon={faBan}
+                    />,
                   ];
                   return (
-                    <BoardListItemAdmin
+                    <Styled.BoardListItemAdmin
                       key={user.id}
                       listItem={listItemU}
                       gridTemplateColumns={'0.3fr 1fr 1fr 1fr 1fr 1fr 0.5fr'}
@@ -505,7 +384,7 @@ const Admin = () => {
                     />
                   );
                 })}
-            </BoardListAdmin>
+            </Styled.BoardListAdmin>
             <Pagination
               dataPerPage={usersPerPage}
               dataLength={usersLength}
@@ -513,12 +392,12 @@ const Admin = () => {
               currentPage={userCurrentPage}
               setCurrentPage={setUserCurrentPage}
             />
-          </ContentBox>
+          </Styled.ContentBox>
         )}
 
         {menu === 1 && (
-          <ContentBox>
-            <BoardListAdmin
+          <Styled.ContentBox>
+            <Styled.BoardListAdmin
               title={
                 <BoardTitleItem
                   title={['ID', 'TITLE', 'USER', 'DATE', 'VIEW', 'LIKES/DISLIKES']}
@@ -539,25 +418,25 @@ const Admin = () => {
                   ];
                   return (
                     <>
-                      <BoardListItemAdmin
+                      <Styled.BoardListItemAdmin
                         key={post.id}
                         listItem={listItemP}
                         gridTemplateColumns={boardSize}
                         linkTo={''}
                         onClick={() => showPostDetail(post.id)}
                       />
-                      <PostDetail active={activePost === post.id}>
+                      <Styled.PostDetail active={activePost === post.id}>
                         <div>{post.content}</div>
-                        <TrashIcon
+                        <Styled.TrashIcon
                           onClick={() => deletePost(post.id)}
                           key={post.id}
                           icon={faTrash}
                         />
-                      </PostDetail>
+                      </Styled.PostDetail>
                     </>
                   );
                 })}
-            </BoardListAdmin>
+            </Styled.BoardListAdmin>
             <Pagination
               dataPerPage={postsPerPage}
               dataLength={postsLength}
@@ -565,11 +444,11 @@ const Admin = () => {
               currentPage={postCurrentPage}
               setCurrentPage={setPostCurrentPage}
             />
-          </ContentBox>
+          </Styled.ContentBox>
         )}
         {menu === 2 && (
-          <ContentBox>
-            <BoardListAdmin
+          <Styled.ContentBox>
+            <Styled.BoardListAdmin
               title={
                 <BoardTitleItem
                   title={['ID', 'CONTENT', 'POST_ID', 'USER_ID', 'DATE', 'LIKES/DISLIKES']}
@@ -590,25 +469,25 @@ const Admin = () => {
                   ];
                   return (
                     <>
-                      <BoardListItemAdmin
+                      <Styled.BoardListItemAdmin
                         key={comment.id}
                         listItem={listItemC}
                         gridTemplateColumns={boardSize}
                         linkTo={''}
                         onClick={() => showCommentDetail(comment.id)}
                       />
-                      <CommentDetail active={activeComment === comment.id}>
+                      <Styled.CommentDetail active={activeComment === comment.id}>
                         <div>{comment.content}</div>
-                        <TrashIcon
+                        <Styled.TrashIcon
                           onClick={() => deleteComment(comment.id)}
                           key={comment.id}
                           icon={faTrash}
                         />
-                      </CommentDetail>
+                      </Styled.CommentDetail>
                     </>
                   );
                 })}
-            </BoardListAdmin>
+            </Styled.BoardListAdmin>
             <Pagination
               dataPerPage={commentsPerPage}
               dataLength={commentsLength}
@@ -616,12 +495,12 @@ const Admin = () => {
               currentPage={commentCurrentPage}
               setCurrentPage={setCommentCurrentPage}
             />
-          </ContentBox>
+          </Styled.ContentBox>
         )}
 
         {menu === 3 && (
-          <ContentBox>
-            <BoardListAdmin
+          <Styled.ContentBox>
+            <Styled.BoardListAdmin
               title={
                 <BoardTitleItem
                   title={['ID', 'ADDRESS', 'DATE']}
@@ -642,7 +521,7 @@ const Admin = () => {
                     />,
                   ];
                   return (
-                    <BoardListItemAdmin
+                    <Styled.BoardListItemAdmin
                       key={ban.id}
                       listItem={listItemB}
                       gridTemplateColumns={'0.5fr 0.5fr 1fr 0.5fr'}
@@ -651,7 +530,7 @@ const Admin = () => {
                     />
                   );
                 })}
-            </BoardListAdmin>
+            </Styled.BoardListAdmin>
             <Pagination
               dataPerPage={bansPerPage}
               dataLength={bansLength}
@@ -659,12 +538,12 @@ const Admin = () => {
               currentPage={banCurrentPage}
               setCurrentPage={setBanCurrentPage}
             />
-          </ContentBox>
+          </Styled.ContentBox>
         )}
 
         {menu === 4 && (
-          <ContentBox>
-            <BoardListAdmin
+          <Styled.ContentBox>
+            <Styled.BoardListAdmin
               title={
                 <BoardTitleItem
                   title={[
@@ -697,22 +576,22 @@ const Admin = () => {
                   ];
                   return (
                     <>
-                      <BoardListItemAdmin
+                      <Styled.BoardListItemAdmin
                         key={idx}
                         listItem={listItemW}
                         gridTemplateColumns={'1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr'}
                         linkTo={''}
                         onClick={() => showWinDetail(idx)}
                       />
-                      <WinDetail active={activeWin === idx}>
-                        <WinBox onClick={() => handleReward('win')}>WIN</WinBox>
-                        <WinBox onClick={() => handleReward('draw')}>DRAW</WinBox>
-                        <WinBox onClick={() => handleReward('lose')}>LOSE</WinBox>
-                      </WinDetail>
+                      <Styled.WinDetail active={activeWin === idx}>
+                        <Styled.WinBox onClick={() => handleReward('win')}>WIN</Styled.WinBox>
+                        <Styled.WinBox onClick={() => handleReward('draw')}>DRAW</Styled.WinBox>
+                        <Styled.WinBox onClick={() => handleReward('lose')}>LOSE</Styled.WinBox>
+                      </Styled.WinDetail>
                     </>
                   );
                 })}
-            </BoardListAdmin>
+            </Styled.BoardListAdmin>
             <Pagination
               dataPerPage={winsPerPage}
               dataLength={winsLength}
@@ -720,10 +599,10 @@ const Admin = () => {
               currentPage={winCurrentPage}
               setCurrentPage={setWinCurrentPage}
             />
-          </ContentBox>
+          </Styled.ContentBox>
         )}
-      </Container>
-    </Layout>
+      </Styled.Container>
+    </Styled.Layout>
   );
 };
 

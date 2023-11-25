@@ -23,7 +23,7 @@ import Donation from './pages/Donation';
 import GalleryPage from './pages/GalleryPage';
 import GalleryDetailPage from './pages/GalleryDetailPage';
 import AdminLogin from './pages/AdminLogin';
-import Admin from './pages/AdminPage/Admin';
+import Admin from './pages/AdminPage';
 import WinTest from './pages/WinTest';
 import PoolPage from './pages/PoolPage';
 
