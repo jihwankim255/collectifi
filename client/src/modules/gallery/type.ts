@@ -1,4 +1,4 @@
-import { nft } from "../type";
+import {nft} from '../../types';
 
 export type gallery = {
   id: number;
@@ -7,7 +7,7 @@ export type gallery = {
   img_url: string;
   tags: string;
   date: string;
-}
+};
 
 export type nftGallerys = {
   id: number;
@@ -15,17 +15,16 @@ export type nftGallerys = {
   nft_id: number;
   isWithdraw: boolean;
   nft_end_time: string; //date
-}
+};
 
-export type galleryDetail = {  
-  Nft: nft &
-  {
-    User: { nickname: string }
-  }
+export type galleryDetail = {
+  Nft: nft & {
+    User: {nickname: string};
+  };
 } & nftGallerys;
 
 export type addCard = {
-  User: { nickname: string };
+  User: {nickname: string};
 } & nft;
 
 export type stakeData = {
@@ -33,4 +32,4 @@ export type stakeData = {
   erc721ca: string;
   gallca: string;
   stake: string;
-}
+};

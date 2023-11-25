@@ -1,39 +1,36 @@
-import axios from './core';
-import {ISCONNECT} from '../modules/atom';
-
-export const checkLogin = async () => {
-  //if(!ISCONNECT) return userInfoData;
-  // const options = {
-  //   method: 'GET',
-  //   url: `${SERVERURL}/checklogin`,
-  //   headers: {accept: 'application/json'},
-  //   withCredentials: true,
-  // };
-
+export const sendTx = async (from: string, to: string, data: string)=> {  
+  if(!window.ethereum) return null;
+  //await window.ethereum.request({ method: 'eth_requestAccounts' });
+  const nonce = await getTransactionCount(from);
+  if(!nonce) return null;
+  
   try {
-    const data = await axios('/checklogin');
-    return data;
-  } catch (err) {
-    console.log('checkLogin err: ', err);
+    const result = await window.ethereum.request({
+      method: 'eth_sendTransaction',
+      params: [{
+        from: from,
+        to: to,      
+        data: data,
+        nonce: nonce
+      }],
+    });    
+    return result;
+  } catch (e) {
+    console.log("sendTx err:", e);
+    return null;
+  }  
+}
+
+export const getTransactionCount = async (address: string) => {
+  if (!window.ethereum) return null;
+  try {
+    const result = await window.ethereum.request({
+      method: 'eth_getTransactionCount',
+      params: [address, 'latest'],
+    });
+    return result;
+  } catch (e) {
+    console.log("getTransactionCount err:", e);
     return null;
   }
-};
-
-export const logout = async () => {
-  //if(!ISCONNECT) return sellCardData;
-  const options = {
-    method: 'POST',
-    url: `${process.env.REACT_APP_BASE_URL}/logout`,
-    headers: {accept: 'application/json'},
-    withCredentials: true,
-    data: {},
-  };
-
-  try {
-    const data = await axios(options);
-    return data;
-  } catch (err) {
-    console.log('logout err: ', err);
-    return null;
-  }
-};
+}
