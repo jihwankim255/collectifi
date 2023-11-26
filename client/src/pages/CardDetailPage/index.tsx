@@ -1,8 +1,8 @@
 import React from 'react';
 import {Suspense} from 'react';
 import {ErrorBoundary} from 'react-error-boundary';
-import CardDetail from '../components/market/CardDetail';
-import Fallback from '../components/Fallback';
+import CardDetail from '../../components/market/CardDetail';
+import Fallback from '../../components/Fallback';
 
 const CardDetailPage = () => {
   return (

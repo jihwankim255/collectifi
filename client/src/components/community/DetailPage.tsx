@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import Button from '../components/UI/Button';
+import Button from '../UI/Button';
 import axios from 'axios';
 import styled from 'styled-components';
-import {data} from '../data/data';
-import {WriteButton, WriteForm, WriteInput, WriteLabel, WriteTextarea} from './WritePage';
-import {PostsAttributes} from './CommunityPage';
+import {data} from '../../data/data';
+import {WriteButton, WriteForm, WriteInput, WriteLabel, WriteTextarea} from '../../pages/WritePage';
+import {PostsAttributes} from '../../pages/CommunityPage';
 import {faThumbsUp, faThumbsDown, faEdit} from '@fortawesome/free-regular-svg-icons';
 import {faCrown, faTrash, faCheck, faClose} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {toast} from 'react-toastify';
-import {userId} from '../atom';
+import {userId} from '../../atom';
 import {useRecoilValue} from 'recoil';
 import PostPage from './PostPage';
 interface PostProps {

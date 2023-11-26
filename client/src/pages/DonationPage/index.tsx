@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {Layout} from '../../Styles';
-import {MiddleBox, TopBox, TopTitle} from '../EventPage';
+import EventStyled from '../EventPage/Event.styled';
 import PageTitle from '../../components/UI/PageTitle';
 import Web3 from 'web3';
 import Styled from './Donation.styled';
@@ -91,10 +91,10 @@ const Donation = () => {
   }, []);
   return (
     <Layout>
-      <TopBox>
+      <EventStyled.TopBox>
         <PageTitle title="DONATIONS" />
-      </TopBox>
-      <MiddleBox>
+      </EventStyled.TopBox>
+      <EventStyled.MiddleBox>
         {infos ? (
           <Styled.GridContainer>
             <Styled.DonationBox onClick={openModalOne}>
@@ -178,7 +178,7 @@ const Donation = () => {
             </Styled.ModalContent>
           </Styled.ModalOverlay>
         )}
-      </MiddleBox>
+      </EventStyled.MiddleBox>
     </Layout>
   );
 };

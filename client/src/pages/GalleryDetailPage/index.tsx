@@ -1,8 +1,8 @@
 import React from 'react';
 import {Suspense} from 'react';
 import {ErrorBoundary} from 'react-error-boundary';
-import GalleryDetail from '../components/gallery/GalleryDetail';
-import Fallback from '../components/Fallback';
+import GalleryDetail from '../../components/gallery/GalleryDetail';
+import Fallback from '../../components/Fallback';
 
 const GalleryDetailPage = () => {
   return (

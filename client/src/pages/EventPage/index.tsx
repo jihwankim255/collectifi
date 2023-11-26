@@ -3,7 +3,7 @@ import {Layout} from '../../Styles';
 import PageTitle from '../../components/UI/PageTitle';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faSearch} from '@fortawesome/free-solid-svg-icons';
-import Styled from './event.styled';
+import Styled from './Event.styled';
 
 const Event = () => {
   const [tab, setTab] = useState(0);

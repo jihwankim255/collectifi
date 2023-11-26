@@ -1,7 +1,7 @@
 import React from 'react';
 import {Suspense} from 'react';
 import {ErrorBoundary} from 'react-error-boundary';
-import Gallery from '../components/gallery/Gallery';
+import Gallery from '../../components/gallery/Gallery';
 
 const StakingPage = () => {
   return (

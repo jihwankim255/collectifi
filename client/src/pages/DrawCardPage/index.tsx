@@ -5,7 +5,6 @@ import axios from 'axios';
 import testImg from '../data/7-1.png';
 import {useNavigate} from 'react-router-dom';
 import {toast} from 'react-toastify';
-import {ParticleS} from '../SwapPage';
 import Fireworks from '../../components/UI/Particle2';
 import ModalAlert from '../../components/UI/ModalAlert';
 import Styled from './DrawCard.styled';

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Route, Routes, useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import PostPage from '../PostPage';
+import PostPage from '../../components/community/PostPage';
 import Pagination from '../../components/UI/Pagination';
 import Button from '../../components/UI/Button';
 import BoardList from '../../components/UI/BoardList';
@@ -12,7 +12,7 @@ import PageTitle from '../../components/UI/PageTitle';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Styled from './Community.styled';
-import DetailPage from '../DetailPage';
+import DetailPage from '../../components/community/DetailPage';
 
 TimeAgo.addDefaultLocale(en);
 export interface PostsAttributes {
