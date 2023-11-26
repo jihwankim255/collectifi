@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {Layout} from '../../Styles';
-import {MiddleBox, TopBox, TopTitle} from '../Event';
+import {MiddleBox, TopBox, TopTitle} from '../EventPage';
 import PageTitle from '../../components/UI/PageTitle';
 import Web3 from 'web3';
 import Styled from './Donation.styled';
