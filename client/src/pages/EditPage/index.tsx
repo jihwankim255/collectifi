@@ -1,95 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import styled from 'styled-components';
-import {NavLogo} from '../components/Header';
 import axios from 'axios';
 import {useLocation, useNavigate, useParams} from 'react-router';
 import {toast} from 'react-toastify';
+import Styled from './Edit.styled';
 
-const Wrapper = styled.div`
-  height: 100vh;
-  max-width: 90%;
-  margin: 0 auto;
-  margin-bottom: 100px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  @media only screen and (max-width: 768px) {
-    max-width: 93%;
-  }
-`;
-const WriteLogo = styled(NavLogo)`
-  padding: 10px;
-  margin: 20px;
-  font-size: 2rem;
-  align-self: flex-start;
-`;
-
-export const WriteLabel = styled.label`
-  text-align: left;
-  font-size: 1.5rem;
-  display: block;
-`;
-const Writeh2 = styled.h2`
-  font-size: 20px;
-  color: ${props => props.theme.mainColor};
-  margin-bottom: 30px;
-`;
-export const WriteForm = styled.form`
-  /* height: 100px; */
-`;
-// height: ${props => props.height}px;
-export const WriteInput = styled.input`
-  width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: block;
-`;
-export const WriteTextarea = styled.textarea`
-  width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: block;
-  resize: none;
-  height: 600px;
-`;
-export const WriteSelect = styled.select`
-  width: 100%;
-  padding: 6px 10px;
-  margin: 10px 0;
-  border: 1px solid #ddd;
-  box-sizing: border-box;
-  display: block;
-`;
-
-const WriteNav = styled.div`
-  background: #e7e5e5;
-  height: 60px;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  position: fixed;
-  bottom: 0;
-  z-index: 10;
-`;
-export const WriteButton = styled.button`
-  background: #f1356d;
-  color: #fff;
-  white-space: nowrap;
-  border: 0;
-  padding: 14px 32px;
-  border-radius: 24px;
-  outline: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  margin-right: 30px;
-`;
 const EditPage = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -134,14 +48,14 @@ const EditPage = () => {
 
   return (
     <>
-      <Wrapper>
-        <WriteLogo to="/" style={{color: 'black'}} className="logo">
+      <Styled.Wrapper>
+        <Styled.WriteLogo to="/" style={{color: 'black'}} className="logo">
           Collectifi
-        </WriteLogo>
-        <Writeh2>Edit Post as.. </Writeh2>
-        <WriteForm>
-          <WriteLabel>title</WriteLabel>
-          <WriteInput
+        </Styled.WriteLogo>
+        <Styled.Writeh2>Edit Post as.. </Styled.Writeh2>
+        <Styled.WriteForm>
+          <Styled.WriteLabel>title</Styled.WriteLabel>
+          <Styled.WriteInput
             minLength={10}
             maxLength={60}
             placeholder="제목을 입력하세요"
@@ -150,15 +64,15 @@ const EditPage = () => {
             value={title}
             onChange={e => setTitle(e.target.value)}
           />
-          <WriteLabel>content</WriteLabel>
-          <WriteTextarea
+          <Styled.WriteLabel>content</Styled.WriteLabel>
+          <Styled.WriteTextarea
             minLength={10}
             maxLength={1500}
             required
             value={content}
             onChange={e => setContent(e.target.value)}
-          ></WriteTextarea>
-          <WriteInput
+          ></Styled.WriteTextarea>
+          <Styled.WriteInput
             placeholder="#태그입력"
             type="text"
             required
@@ -170,11 +84,11 @@ const EditPage = () => {
           <option value="mario">mario</option>
           <option value="yoshi">yoshi</option>
         </WriteSelect> */}
-        </WriteForm>
-      </Wrapper>
-      <WriteNav>
-        <WriteButton onClick={() => handleSubmit()}>Edit</WriteButton>
-      </WriteNav>
+        </Styled.WriteForm>
+      </Styled.Wrapper>
+      <Styled.WriteNav>
+        <Styled.WriteButton onClick={() => handleSubmit()}>Edit</Styled.WriteButton>
+      </Styled.WriteNav>
     </>
   );
 };
