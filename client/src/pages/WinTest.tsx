@@ -15,7 +15,7 @@ const WinTest = () => {
   const [gameInfo, setGameInfo] = useState<gameInfo>();
 
   useEffect(() => {
-    axios.get('http://localhost:8000/admin/win', {withCredentials: true}).then(res => {
+    axios.get(`${process.env.REACT_APP_BASE_URL}/admin/win`, {withCredentials: true}).then(res => {
       console.log(res.data.data);
       setGameInfo(res.data.data);
     });

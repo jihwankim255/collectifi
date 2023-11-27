@@ -21,7 +21,7 @@ const PoolPage = () => {
 
   const handleCalClick = async () => {
     const response = await axios.post(
-      'http://localhost:8000/exchange/liquidityaccount',
+      `${process.env.REACT_APP_BASE_URL}/exchange/liquidityaccount`,
       {ethAmount},
       {withCredentials: true},
     );
@@ -32,7 +32,7 @@ const PoolPage = () => {
   const handleSwap = async () => {
     if (confirm('Do you want to Swap ETH to COL?')) {
       const response = await axios.post(
-        'http://localhost:8000/exchange/liquidity',
+        `${process.env.REACT_APP_BASE_URL}/exchange/liquidity`,
         {ethAmount, tokenAmount: colAmount},
         {withCredentials: true},
       );

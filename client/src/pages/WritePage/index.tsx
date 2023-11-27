@@ -1,20 +1,22 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router';
 import {toast} from 'react-toastify';
-import {Height} from './types';
 import Styled from './Write.styled';
 
 const WritePage = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  const [author, setAuthor] = useState('mario');
   const [tag, setTag] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = () => {
     axios
-      .post('http://localhost:8000/community/post', {title, content}, {withCredentials: true})
+      .post(
+        `${process.env.REACT_APP_BASE_URL}/community/post`,
+        {title, content},
+        {withCredentials: true},
+      )
       .then(res => {
         console.log(res);
         navigate('/community');

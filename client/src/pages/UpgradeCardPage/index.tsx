@@ -20,11 +20,13 @@ const UpgradeCardPage = () => {
   const totalCards = myCards.length - 1;
   const currId = useRecoilValue(userId);
   useEffect(() => {
-    axios.get('http://localhost:8000/upgrade', {withCredentials: true}).then((res: any) => {
-      setMyCards(res.data.data.nfts);
-      setMyTokens(res.data.data.token_amount);
-      console.log('get upgrade: ', res.data.data);
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/upgrade`, {withCredentials: true})
+      .then((res: any) => {
+        setMyCards(res.data.data.nfts);
+        setMyTokens(res.data.data.token_amount);
+        console.log('get upgrade: ', res.data.data);
+      });
 
     console.log('hi');
   }, []);
@@ -33,7 +35,7 @@ const UpgradeCardPage = () => {
     e.preventDefault();
     if (confirm('정말 강화 하시겠습니까?')) {
       axios
-        .post('http://localhost:8000/upgrade', {nft: target}, {withCredentials: true})
+        .post(`${process.env.REACT_APP_BASE_URL}/upgrade`, {nft: target}, {withCredentials: true})
         .then((res: any) => {
           if (res.data.message === '성공했습니다.') {
             console.log('upgrade res: ', res);

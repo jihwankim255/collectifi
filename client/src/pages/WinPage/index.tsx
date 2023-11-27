@@ -16,7 +16,9 @@ const WinPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get('http://localhost:8000/game/fund', {withCredentials: true});
+      const response = await axios.get(`${process.env.REACT_APP_BASE_URL}/game/fund`, {
+        withCredentials: true,
+      });
       const {drawToken, winToken, loseToken, totalToken, winDiainage, drawDiainage, loseDiainage} =
         response.data.data;
       const winRate = (winToken / totalToken) * 100;
@@ -35,7 +37,7 @@ const WinPage = () => {
     if (confirm(`Home팀 ${selectedOption}에 ${betAmount} COL 베팅하시겠습니까?`)) {
       console.log('성공');
       const response = await axios.post(
-        'http://localhost:8000/game/fund',
+        `${process.env.REACT_APP_BASE_URL}/game/fund`,
         {game: selectedOption, value: betAmount},
         {withCredentials: true},
       );

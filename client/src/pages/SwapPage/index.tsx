@@ -20,7 +20,7 @@ const SwapPage = () => {
 
   const handleCalClick = async () => {
     const response = await axios.post(
-      'http://localhost:8000/exchange/swapaccount',
+      `${process.env.REACT_APP_BASE_URL}/exchange/swapaccount`,
       {ethAmount},
       {withCredentials: true},
     );
@@ -31,7 +31,7 @@ const SwapPage = () => {
   const handleSwap = async () => {
     if (confirm('Do you want to Swap ETH to COL?')) {
       const response = await axios.post(
-        'http://localhost:8000/exchange/swap',
+        `${process.env.REACT_APP_BASE_URL}/exchange/swap`,
         {ethAmount},
         {withCredentials: true},
       );

@@ -25,17 +25,19 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
 
   useEffect(() => {
     // 포스트 디테일을 불러옴
-    axios.get(`http://localhost:8000/community/${id}`, {withCredentials: true}).then(res => {
-      setPost(res.data.data.post);
-      setComments(res.data.data.comments);
-      setIsOwner(res.data.data.isOwner);
-      setLike(res.data.data.post.likes);
-      setdislike(res.data.data.post.dislikes);
-      setPostTitle(res.data.data.post.title);
-      setPostContent(res.data.data.post.content);
-      setUser_Id(res.data.data.userId);
-      console.log('res: ', res);
-    });
+    axios
+      .get(`${process.env.REACT_APP_BASE_URL}/community/${id}`, {withCredentials: true})
+      .then(res => {
+        setPost(res.data.data.post);
+        setComments(res.data.data.comments);
+        setIsOwner(res.data.data.isOwner);
+        setLike(res.data.data.post.likes);
+        setdislike(res.data.data.post.dislikes);
+        setPostTitle(res.data.data.post.title);
+        setPostContent(res.data.data.post.content);
+        setUser_Id(res.data.data.userId);
+        console.log('res: ', res);
+      });
 
     // if (id) {
     //   setPost(data[parseInt(id) - 1]);
@@ -47,7 +49,7 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
   const [postContent, setPostContent] = useState('');
   const handleEdit = () => {
     axios
-      .get(`http://localhost:8000/community/${id}/edit`, {withCredentials: true})
+      .get(`${process.env.REACT_APP_BASE_URL}/community/${id}/edit`, {withCredentials: true})
       .then(res => {
         console.log('게시글 수정 요청: ', res);
         navigate('/edit', {state: {title: postTitle, content: postContent, id: id}});
@@ -59,12 +61,12 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
     console.log('글을 삭제하시겠습니까?');
     if (!confirm('Are you sure you want to delete the post?')) return;
     axios
-      .delete(`http://localhost:8000/community/${id}/delete`, {withCredentials: true})
+      .delete(`${process.env.REACT_APP_BASE_URL}/community/${id}/delete`, {withCredentials: true})
       .then(res => {
         console.log('글삭제 요청 결과2: ', res);
         // 글삭제 성공시 글목록 다시 불러오기
         axios
-          .get('http://localhost:8000/community')
+          .get(`${process.env.REACT_APP_BASE_URL}/community`)
           .then(response => {
             setPosts(
               [...response.data.data].map(post => {
@@ -94,7 +96,11 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
   const [dislike, setdislike] = useState(0);
   const handleLikes = (data: string) => {
     axios
-      .post(`http://localhost:8000/community/${id}/like`, {data}, {withCredentials: true})
+      .post(
+        `${process.env.REACT_APP_BASE_URL}/community/${id}/like`,
+        {data},
+        {withCredentials: true},
+      )
       .then(res => {
         console.log('좋아요: ', res);
         if (data == 'likes') {
@@ -120,7 +126,7 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
     e.preventDefault();
     axios
       .post(
-        `http://localhost:8000/community/${id}/comment`,
+        `${process.env.REACT_APP_BASE_URL}/community/${id}/comment`,
         {content: comment},
         {withCredentials: true},
       )
@@ -143,9 +149,9 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
   const [commentDislike, setCommentDislike] = useState(0);
   const handleCommentLikes = (e: number, like: string) => {
     console.log('라이크: ', like);
-    axios // localhost:8000/community/2/comment/3/like
+    axios
       .post(
-        `http://localhost:8000/community/${id}/comment/${e}/like`,
+        `${process.env.REACT_APP_BASE_URL}/community/${id}/comment/${e}/like`,
         {data: like},
         {withCredentials: true},
       )
@@ -187,7 +193,9 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
   };
   const editComment = (e: number) => {
     axios
-      .get(`http://localhost:8000/community/${id}/comment/${e}/edit`, {withCredentials: true})
+      .get(`${process.env.REACT_APP_BASE_URL}/community/${id}/comment/${e}/edit`, {
+        withCredentials: true,
+      })
       .then(res => {
         console.log('댓글 수정 요청: ', res);
         console.log(res.data.data);
@@ -205,7 +213,9 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
     console.log('댓글을 삭제하시겠습니까?');
     if (!confirm('Are you sure you want to delete the comment?')) return;
     axios
-      .delete(`http://localhost:8000/community/${id}/comment/${e}`, {withCredentials: true})
+      .delete(`${process.env.REACT_APP_BASE_URL}/community/${id}/comment/${e}`, {
+        withCredentials: true,
+      })
       .then(res => {
         console.log('댓글삭제 요청 결과: ', res);
         toast.info('Deleted comment successfully.');
@@ -224,7 +234,7 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
   const editCommentSave = (e: number) => {
     axios
       .patch(
-        `http://localhost:8000/community/${id}/comment/${e}/edit`,
+        `${process.env.REACT_APP_BASE_URL}/community/${id}/comment/${e}/edit`,
         {content: editContent},
         {withCredentials: true},
       )

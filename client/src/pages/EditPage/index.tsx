@@ -28,7 +28,7 @@ const EditPage = () => {
     console.log('id 파라미터:', id);
     axios
       .patch(
-        `http://localhost:8000/community/${id}/edit`,
+        `${process.env.REACT_APP_BASE_URL}/community/${id}/edit`,
         {title, content},
         {withCredentials: true},
       )
