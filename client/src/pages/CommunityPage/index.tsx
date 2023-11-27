@@ -9,42 +9,16 @@ import BoardTitleItem from '../../components/UI/BoardTitleItem';
 import BoardListItem from '../../components/UI/BoardListItem';
 import PageTitle from '../../components/UI/PageTitle';
 // created_at 포맷 라이브러리
-import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import Styled from './Community.styled';
-import DetailPage from '../../components/community/DetailPage';
-
-TimeAgo.addDefaultLocale(en);
-export interface PostsAttributes {
-  id: number;
-  user_id: number;
-  title: string;
-  content: string;
-  likes: number;
-  dislikes: number;
-  created_at: Date;
-  views: number;
-  Post_comments: object[];
-  User?: User;
-}
-interface User {
-  nickname: string;
-  rank?: number;
-}
-interface IRank {
-  id: number;
-  user_id: number;
-  post_id: number;
-  likes: number;
-  ranking: number;
-}
+import DetailPage from '../../components/community/Detail';
+import {PostsAttributes, IRank} from './types';
 
 const Community = () => {
   const navigate = useNavigate();
   const boardSize = '0.4fr 3fr 0.5fr 0.5fr 1fr 0.5fr 0.5fr';
   const [posts, setPosts] = useState<PostsAttributes[]>([]);
   const [popularPosts, setPopularPosts] = useState<PostsAttributes[]>([]);
-  const timeAgo = new TimeAgo('en-US');
   const [tabs, setTabs] = useState('General');
   const params = {
     tabs: tabs,

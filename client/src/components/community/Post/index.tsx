@@ -12,7 +12,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {toast} from 'react-toastify';
 import {userId} from '../../../atom';
 import {useRecoilValue} from 'recoil';
-import {PostProps, Post, User, Post_comment, Post_comment_likeds} from './types';
+import {PostProps, Post, Post_comment} from './types';
 
 const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
   const navigate = useNavigate();
