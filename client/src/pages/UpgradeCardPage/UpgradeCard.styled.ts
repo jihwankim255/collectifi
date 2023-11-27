@@ -1,5 +1,5 @@
 import styled, {keyframes} from 'styled-components';
-import {StyledDivProps, Card} from './types';
+import {StyledDivProps} from './types';
 
 const NeonBox = styled.div<{shadow: string; border: string}>`
   border: 5px solid ${({border}) => border};

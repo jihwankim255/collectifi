@@ -2,6 +2,7 @@ import React, {useCallback} from 'react';
 import Particles from 'react-tsparticles';
 import type {Container, Engine} from 'tsparticles-engine';
 import {loadFull} from 'tsparticles';
+/** SwapPage 배경 */
 const Particle = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
     console.log(engine);

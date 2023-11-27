@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {useRecoilValue, useRecoilRefresher_UNSTABLE} from 'recoil';
 import {addCardByGallIdQuery} from '../../api/gallery/atom';
 import {addCard} from '../../api/gallery/type';
-
 import CardList from '../market/CardList';
 import CardListItem from '../market/CardListItem';
 import PlayerCard from '../UI/PlayerCard';

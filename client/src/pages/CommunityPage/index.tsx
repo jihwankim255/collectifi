@@ -8,8 +8,6 @@ import BoardList from '../../components/UI/BoardList';
 import BoardTitleItem from '../../components/UI/BoardTitleItem';
 import BoardListItem from '../../components/UI/BoardListItem';
 import PageTitle from '../../components/UI/PageTitle';
-// created_at 포맷 라이브러리
-import en from 'javascript-time-ago/locale/en';
 import Styled from './Community.styled';
 import DetailPage from '../../components/community/Detail';
 import {PostsAttributes, IRank} from './types';

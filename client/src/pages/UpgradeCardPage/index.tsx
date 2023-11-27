@@ -10,13 +10,13 @@ import Button from '../../components/UI/Button';
 import {userId} from '../../atom';
 import {useRecoilValue} from 'recoil';
 import Styled from './UpgradeCard.styled';
-import {Card} from './types';
+import {CardProps} from './types';
 
 const UpgradeCardPage = () => {
-  const [myCards, setMyCards] = useState<Card[]>([]);
+  const [myCards, setMyCards] = useState<CardProps[]>([]);
   const [myTokens, setMyTokens] = useState('');
-  const [target, setTarget] = useState<Card | null>();
-  const [upgradeCard, setUpgradeCard] = useState<Card>();
+  const [target, setTarget] = useState<CardProps | null>();
+  const [upgradeCard, setUpgradeCard] = useState<CardProps>();
   const totalCards = myCards.length - 1;
   const currId = useRecoilValue(userId);
   useEffect(() => {

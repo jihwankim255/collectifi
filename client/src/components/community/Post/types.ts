@@ -1,4 +1,4 @@
-import {PostsAttributes} from '../../../pages/CommunityPage/index';
+import {PostsAttributes} from '../../../pages/CommunityPage/types';
 
 export interface PostProps {
   setCurrentPage: (value: number) => void;
