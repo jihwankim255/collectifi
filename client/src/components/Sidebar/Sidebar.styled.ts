@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import {FaTimes} from 'react-icons/fa';
 import {Link} from 'react-router-dom';
@@ -95,28 +94,13 @@ const SidebarRoute = styled.div`
   }
 `;
 
-const Sidebar = ({isOpen, toggle}: {isOpen: boolean; toggle: () => void}) => {
-  return (
-    <SidebarContainer isOpen={isOpen} onClick={toggle}>
-      <Icon>
-        <CloseIcon />
-      </Icon>
-      <SidebarWrapper>
-        <SidebarMenu>
-          <SidebarLink to="/draw">Pack</SidebarLink>
-          <SidebarLink to="/upgrade">Upgrade</SidebarLink>
-          <SidebarLink to="/staking">Staking</SidebarLink>
-          <SidebarLink to="/swap">Swap</SidebarLink>
-          <SidebarLink to="/market">Market</SidebarLink>
-          <SidebarLink to="/win">Win</SidebarLink>
-          <SidebarLink to="/community">Community</SidebarLink>
-        </SidebarMenu>
-        <SideBtnWrap>
-          <SidebarRoute>Connect</SidebarRoute>
-        </SideBtnWrap>
-      </SidebarWrapper>
-    </SidebarContainer>
-  );
+export default {
+  SidebarContainer,
+  CloseIcon,
+  Icon,
+  SidebarWrapper,
+  SidebarLink,
+  SideBtnWrap,
+  SidebarMenu,
+  SidebarRoute,
 };
-
-export default Sidebar;

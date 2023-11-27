@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {NavLogo} from '../../components/Header';
+import HeaderStyled from '../../components/Header/Header.styled';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
     max-width: 93%;
   }
 `;
-const WriteLogo = styled(NavLogo)`
+const WriteLogo = styled(HeaderStyled.NavLogo)`
   padding: 10px;
   margin: 20px;
   font-size: 2rem;
