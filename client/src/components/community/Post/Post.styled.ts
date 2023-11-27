@@ -1,54 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
-import Button from '../UI/Button';
-import axios from 'axios';
 import styled from 'styled-components';
-import {data} from '../../data/data';
-import {WriteButton, WriteForm, WriteInput, WriteLabel, WriteTextarea} from '../../pages/WritePage';
-import {PostsAttributes} from '../../pages/CommunityPage';
-import {faThumbsUp, faThumbsDown, faEdit} from '@fortawesome/free-regular-svg-icons';
-import {faCrown, faTrash, faCheck, faClose} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {toast} from 'react-toastify';
-import {userId} from '../../atom';
-import {useRecoilValue} from 'recoil';
-import PostPage from './Post';
-interface PostProps {
-  setCurrentPage: (value: number) => void;
-  setPosts: (value: PostsAttributes[]) => void;
-  posts: PostsAttributes[];
-}
-
-interface Post {
-  user_id: number;
-  title: string;
-  content: string;
-  likes: number;
-  dislikes: number;
-  created_at: string;
-  views: number;
-  Post_comments: Post_comment[];
-  User?: User;
-}
-interface User {
-  nickname: string;
-  rank: number;
-}
-
-interface Post_comment {
-  id: number;
-  user_id: number;
-  post_id: number;
-  content: string;
-  likes: number;
-  dislikes: number;
-  created_at: Date;
-  User: User;
-  Post_comment_likeds: Post_comment_likeds[];
-}
-interface Post_comment_likeds {
-  user_id?: number;
-}
 
 const PostLayout = styled.div`
   margin-top: 20px;
@@ -247,16 +198,35 @@ const Thumbs = styled.span`
   margin-right: 5px;
 `;
 
-const DetailPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
-  const navigate = useNavigate();
-  const {id} = useParams<{id: string}>();
-  const [post, setPost] = useState<Post | null>(null);
-  const [comments, setComments] = useState<Post_comment[]>([]);
-  const [isOwner, setIsOwner] = useState(false);
-  const [user_Id, setUser_Id] = useState(0);
-  const recoilUserId = useRecoilValue(userId);
-
-  return <PostPage setCurrentPage={setCurrentPage} setPosts={setPosts} posts={posts}></PostPage>;
+export default {
+  PostLayout,
+  Title,
+  WriterDate,
+  WriteContent,
+  Writer,
+  DateS,
+  PostForm,
+  PostLikeDiv,
+  LikeCount,
+  DisLikeCount,
+  IsOwner,
+  OwnersBtn,
+  CommentContainer,
+  Comment,
+  CommentUser,
+  NickRank,
+  CrownIcon,
+  EditButton,
+  DeleteButton,
+  CheckButton,
+  CloseButton,
+  Cancel,
+  Save,
+  CommentContent,
+  CommentInput,
+  LieksContainer,
+  Comment_likes,
+  PostTextarea,
+  ButtonContainer,
+  Thumbs,
 };
-
-export default DetailPage;

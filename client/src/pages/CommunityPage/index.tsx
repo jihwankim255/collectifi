@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {Route, Routes, useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import PostPage from '../../components/community/PostPage';
+import PostPage from '../../components/community/Post';
 import Pagination from '../../components/UI/Pagination';
 import Button from '../../components/UI/Button';
 import BoardList from '../../components/UI/BoardList';
