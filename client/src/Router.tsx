@@ -1,13 +1,11 @@
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
-import Footer from './components/Footer';
 import PageLayout from './components/PageLayout';
 import MainPage from './pages/MainPage';
 import NotFound from './pages/NotFoundPage';
 import Community from './pages/CommunityPage';
 import DrawCardPage from './pages/DrawCardPage';
 import UpgradeCardPage from './pages/UpgradeCardPage';
-import StakingPage from './pages/StakingPage';
 import SwapPage from './pages/SwapPage';
 import MarketPage from './pages/MarketPage';
 import WinPage from './pages/WinPage';

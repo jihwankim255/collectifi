@@ -147,79 +147,89 @@ const Admin = () => {
   useEffect(() => {
     if (menu === 0) {
       if (users.length === 0) {
-        axios.get('http://localhost:8000/admin/users', {withCredentials: true}).then(res => {
-          setUsers(res.data.data.users);
-          setUsersLength(res.data.data.users.length);
-          setUserCurrentPage(1);
-          console.log('유저: ', res.data.data.users);
-        });
+        axios
+          .get(`${process.env.REACT_APP_BASE_URL}/admin/users`, {withCredentials: true})
+          .then(res => {
+            setUsers(res.data.data.users);
+            setUsersLength(res.data.data.users.length);
+            setUserCurrentPage(1);
+            console.log('유저: ', res.data.data.users);
+          });
       } else {
         console.log('이미 users 데이터가 존재');
       }
     } else if (menu === 1) {
       if (posts.length === 0) {
-        axios.get('http://localhost:8000/admin/posts', {withCredentials: true}).then(res => {
-          // setPosts(res.data.data.posts);
-          setPosts(
-            [...res.data.data.posts].map(post => {
-              return {
-                ...post,
-                created_at: new Date(post.created_at),
-              };
-            }),
-          );
-          setPostsLength(res.data.data.posts.length);
-          setPostCurrentPage(1);
-          console.log('포스트: ', res.data.data.posts);
-        });
+        axios
+          .get(`${process.env.REACT_APP_BASE_URL}/admin/posts`, {withCredentials: true})
+          .then(res => {
+            // setPosts(res.data.data.posts);
+            setPosts(
+              [...res.data.data.posts].map(post => {
+                return {
+                  ...post,
+                  created_at: new Date(post.created_at),
+                };
+              }),
+            );
+            setPostsLength(res.data.data.posts.length);
+            setPostCurrentPage(1);
+            console.log('포스트: ', res.data.data.posts);
+          });
       } else {
         console.log('이미 posts 데이터가 존재');
       }
     } else if (menu === 2) {
       if (comments.length === 0) {
-        axios.get('http://localhost:8000/admin/comments', {withCredentials: true}).then(res => {
-          setComments(res.data.data.comments);
-          setCommentsLength(res.data.data.comments.length);
-          setCommentCurrentPage(1);
-          console.log('댓글: ', res.data.data.comments);
-        });
+        axios
+          .get(`${process.env.REACT_APP_BASE_URL}/admin/comments`, {withCredentials: true})
+          .then(res => {
+            setComments(res.data.data.comments);
+            setCommentsLength(res.data.data.comments.length);
+            setCommentCurrentPage(1);
+            console.log('댓글: ', res.data.data.comments);
+          });
       } else {
         console.log('이미 comments 데이터가 존재');
       }
     } else if (menu === 3) {
       if (bans.length === 0) {
-        axios.get('http://localhost:8000/admin/blacklists', {withCredentials: true}).then(res => {
-          setBans(
-            [...res.data.data.blacklists].map(black => {
-              return {
-                ...black,
-                created_at: new Date(black.created_at),
-              };
-            }),
-          );
-          setBansLength(res.data.data.blacklists.length);
-          setBanCurrentPage(1);
-          console.log('블랙리스트: ', res.data.data.blacklists);
-        });
+        axios
+          .get(`${process.env.REACT_APP_BASE_URL}/admin/blacklists`, {withCredentials: true})
+          .then(res => {
+            setBans(
+              [...res.data.data.blacklists].map(black => {
+                return {
+                  ...black,
+                  created_at: new Date(black.created_at),
+                };
+              }),
+            );
+            setBansLength(res.data.data.blacklists.length);
+            setBanCurrentPage(1);
+            console.log('블랙리스트: ', res.data.data.blacklists);
+          });
       } else {
         console.log('이미 blacklists 데이터가 존재');
       }
     } else if (menu === 4) {
       if (wins.length === 0) {
-        axios.get('http://localhost:8000/admin/win', {withCredentials: true}).then(res => {
-          setWins([res.data.data]);
-          // setWins(
-          //   [...res.data.data.blacklists].map(black => {
-          //     return {
-          //       ...black,
-          //       created_at: new Date(black.created_at),
-          //     };
-          //   }),
-          // );
-          setWinsLength(res.data.data.length);
-          setWinCurrentPage(1);
-          console.log('Win: ', res.data.data);
-        });
+        axios
+          .get(`${process.env.REACT_APP_BASE_URL}/admin/win`, {withCredentials: true})
+          .then(res => {
+            setWins([res.data.data]);
+            // setWins(
+            //   [...res.data.data.blacklists].map(black => {
+            //     return {
+            //       ...black,
+            //       created_at: new Date(black.created_at),
+            //     };
+            //   }),
+            // );
+            setWinsLength(res.data.data.length);
+            setWinCurrentPage(1);
+            console.log('Win: ', res.data.data);
+          });
       } else {
         console.log('이미 wins 데이터가 존재');
       }
@@ -230,7 +240,7 @@ const Admin = () => {
   const banUser = (address: string) => {
     if (confirm('Are you sure you want to ban?')) {
       axios
-        .post('http://localhost:8000/admin/user', {address}, {withCredentials: true})
+        .post(`${process.env.REACT_APP_BASE_URL}/admin/user`, {address}, {withCredentials: true})
         .then(res => {
           toast.success('Banned user successfully');
 
@@ -246,7 +256,10 @@ const Admin = () => {
   const unbanUser = (address: string) => {
     if (confirm('Are you sure you want to unban?')) {
       axios
-        .delete('http://localhost:8000/admin/blacklist', {data: {address}, withCredentials: true})
+        .delete(`${process.env.REACT_APP_BASE_URL}/admin/blacklist`, {
+          data: {address},
+          withCredentials: true,
+        })
         .then(res => {
           toast.success('Unbanned user successfully');
 
@@ -266,7 +279,7 @@ const Admin = () => {
   const deletePost = (id: number) => {
     if (confirm('Are you sure you want to delete post?')) {
       axios
-        .delete('http://localhost:8000/admin/post', {data: {id}, withCredentials: true})
+        .delete(`${process.env.REACT_APP_BASE_URL}/admin/post`, {data: {id}, withCredentials: true})
         .then(res => {
           toast.success('Deleted post successfully');
 
@@ -282,7 +295,10 @@ const Admin = () => {
   const deleteComment = (id: number) => {
     if (confirm('Are you sure you want to delete comment?')) {
       axios
-        .delete('http://localhost:8000/admin/comment', {data: {id}, withCredentials: true})
+        .delete(`${process.env.REACT_APP_BASE_URL}/admin/comment`, {
+          data: {id},
+          withCredentials: true,
+        })
         .then(res => {
           toast.success('Deleted comment successfully');
 
@@ -298,7 +314,7 @@ const Admin = () => {
   const handleReward = async (e: any) => {
     if (confirm(`Are you sure to give reward to ${e}???`)) {
       const response = await axios.post(
-        'http://localhost:8000/admin/win',
+        `${process.env.REACT_APP_BASE_URL}/admin/win`,
         {e},
         {withCredentials: true},
       );
