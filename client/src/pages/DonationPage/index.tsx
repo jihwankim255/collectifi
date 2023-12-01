@@ -5,7 +5,7 @@ import EventStyled from '../EventPage/Event.styled';
 import PageTitle from '../../components/UI/PageTitle';
 import Web3 from 'web3';
 import Styled from './Donation.styled';
-import {BarSegmentProps, Info} from './types';
+import {Info} from './types';
 
 const Donation = () => {
   const [infos, setInfos] = useState<Info[]>([]);

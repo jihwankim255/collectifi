@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import Button from '../../UI/Button';
 import axios from 'axios';
+import axiosInstance from '../../../api/core';
 import {data} from '../../../data/data';
 import WriteStyled from '../../../pages/WritePage/Write.styled';
 import CommunityStyled from '../../../pages/CommunityPage/Community.styled';
@@ -25,31 +26,23 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
 
   useEffect(() => {
     // 포스트 디테일을 불러옴
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/community/${id}`, {withCredentials: true})
-      .then(res => {
-        setPost(res.data.data.post);
-        setComments(res.data.data.comments);
-        setIsOwner(res.data.data.isOwner);
-        setLike(res.data.data.post.likes);
-        setdislike(res.data.data.post.dislikes);
-        setPostTitle(res.data.data.post.title);
-        setPostContent(res.data.data.post.content);
-        setUser_Id(res.data.data.userId);
-        console.log('res: ', res);
-      });
-
-    // if (id) {
-    //   setPost(data[parseInt(id) - 1]);
-    //   setCurrentPage(Math.ceil(parseInt(id) / 20));
-    // }
+    axiosInstance(`/community/${id}`).then(res => {
+      setPost(res.data.post);
+      setComments(res.data.comments);
+      setIsOwner(res.data.isOwner);
+      setLike(res.data.post.likes);
+      setdislike(res.data.post.dislikes);
+      setPostTitle(res.data.post.title);
+      setPostContent(res.data.post.content);
+      setUser_Id(res.data.userId);
+      console.log('res: ', res);
+    });
   }, [id]);
   // 게시글 수정 관련
   const [postTitle, setPostTitle] = useState('');
   const [postContent, setPostContent] = useState('');
   const handleEdit = () => {
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/community/${id}/edit`, {withCredentials: true})
+    axiosInstance(`/community/${id}/edit`)
       .then(res => {
         console.log('게시글 수정 요청: ', res);
         navigate('/edit', {state: {title: postTitle, content: postContent, id: id}});
@@ -65,11 +58,11 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
       .then(res => {
         console.log('글삭제 요청 결과2: ', res);
         // 글삭제 성공시 글목록 다시 불러오기
-        axios
-          .get(`${process.env.REACT_APP_BASE_URL}/community`)
-          .then(response => {
+        axiosInstance(`/community`)
+          .then(res => {
+            console.log('res?: ', res.data);
             setPosts(
-              [...response.data.data].map(post => {
+              [...res.data].map(post => {
                 return {
                   ...post,
                   created_at: new Date(post.created_at),

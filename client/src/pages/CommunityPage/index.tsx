@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Route, Routes, useNavigate} from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from '../../api/core';
 import PostPage from '../../components/community/Post';
 import Pagination from '../../components/UI/Pagination';
 import Button from '../../components/UI/Button';
@@ -23,13 +23,11 @@ const Community = () => {
   };
   useEffect(() => {
     // 모든 게시글을 불러옴
-
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/community`, {params})
+    axiosInstance(`community`, {params})
       .then(response => {
         console.log('모든 게시글: ', response);
         setPosts(
-          [...response.data.data].map(post => {
+          [...response.data].map(post => {
             return {
               ...post,
               created_at: new Date(post.created_at),
@@ -99,11 +97,10 @@ const Community = () => {
 
   const [ranks, setRanks] = useState<IRank[]>([]);
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_BASE_URL}/rank`, {withCredentials: true})
+    axiosInstance(`/rank`)
       .then(response => {
-        console.log('모든 랭크: ', response.data.data.ranks);
-        setRanks([...response.data.data.ranks]);
+        console.log('모든 랭크: ', response.data.ranks);
+        setRanks([...response.data.ranks]);
       })
       .catch(error => {
         console.error(error);
