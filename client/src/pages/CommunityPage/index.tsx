@@ -68,16 +68,12 @@ const Community = () => {
 
   const filterSelected = (e: any) => {
     if (e.target.value === 'latest') {
-      console.log('this is latest');
       setPosts(prev => [...prev.sort((a, b) => b.created_at.getTime() - a.created_at.getTime())]);
     } else if (e.target.value === 'views') {
-      console.log('this is views');
       setPosts(prev => [...prev.sort((a, b) => b.views - a.views)]);
     } else if (e.target.value === 'likes') {
       setPosts(prev => [...prev.sort((a, b) => b.likes - a.likes)]);
-      console.log('this is likes', posts);
     } else if (e.target.value === 'comments') {
-      console.log('this is most commented');
       setPosts(prev => [...prev.sort((a, b) => b.Post_comments.length - a.Post_comments.length)]);
     }
   };
@@ -99,7 +95,6 @@ const Community = () => {
   useEffect(() => {
     axiosInstance(`/rank`)
       .then(response => {
-        console.log('모든 랭크: ', response.data.ranks);
         setRanks([...response.data.ranks]);
       })
       .catch(error => {

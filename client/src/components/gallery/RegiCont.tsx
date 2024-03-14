@@ -45,7 +45,6 @@ const RegiForm: React.FC<Props> = props => {
     setSelectedDate(date);
     const timestamp = Math.floor(date.getTime() / 1000);
     setReward(updateReward(timestamp, 1));
-    console.log(timestamp);
     if (props.onChange) props.onChange(timestamp);
   };
 
@@ -72,9 +71,7 @@ const RegiForm: React.FC<Props> = props => {
       return;
     }
     const stakeQData = stakeQ.data;
-    console.log(stakeQData);
     const approveResult = await sendTx(userAddress, stakeQData.erc721ca, stakeQData.approve);
-    console.log(approveResult);
     if (!approveResult) {
       openModal('전시등록 실패', 'Approve 요청에 실패 했어요.');
       return;
@@ -90,7 +87,6 @@ const RegiForm: React.FC<Props> = props => {
       return;
     }
     const stakeResult = await sendTx(userAddress, stakeData.gallca, stakeData.stake);
-    console.log(stakeResult);
     if (!stakeResult) {
       openModal('전시등록 실패', 'Stake 요청에 실패 했어요.');
       return;
@@ -103,7 +99,6 @@ const RegiForm: React.FC<Props> = props => {
     };
 
     const sellRegi = await snapshot.getPromise(addCardRegiQuery(params));
-    console.log(params, sellRegi);
     if (!sellRegi) {
       openModal('전시등록 실패', '전시DB등록에 실패 했어요.');
       return;
@@ -115,8 +110,6 @@ const RegiForm: React.FC<Props> = props => {
     openModal('전시등록 성공', '전시등록에 성공 했어요.');
     return;
   });
-
-  console.log(props.selectedTokenId);
 
   const minDate = new Date();
   const maxDate = new Date(props.endDate);

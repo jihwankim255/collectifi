@@ -18,7 +18,6 @@ const WritePage = () => {
         {withCredentials: true},
       )
       .then(res => {
-        console.log(res);
         navigate('/community');
         toast.success('You have successfully written! 🎈');
       })

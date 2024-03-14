@@ -73,7 +73,7 @@ const Admin = () => {
   const [posts, setPosts] = useState<IPosts[]>([]);
   const [postsLength, setPostsLength] = useState(posts.length);
   const [postCurrentPage, setPostCurrentPage] = useState(1);
-  const postsPerPage = 20;
+  const postsPerPage = 10;
   const indexOfLastPosts = postCurrentPage * postsPerPage;
   const indexOfFirstPosts = indexOfLastPosts - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPosts, indexOfLastPosts);
@@ -83,7 +83,6 @@ const Admin = () => {
   const [activePost, setActivePost] = useState(0);
   const showPostDetail = (id: number) => {
     if (activePost !== id) {
-      console.log('post id: ', id);
       setActivePost(id);
     } else {
       setActivePost(0);
@@ -153,7 +152,6 @@ const Admin = () => {
             setUsers(res.data.data.users);
             setUsersLength(res.data.data.users.length);
             setUserCurrentPage(1);
-            console.log('유저: ', res.data.data.users);
           });
       } else {
         console.log('이미 users 데이터가 존재');
@@ -174,7 +172,6 @@ const Admin = () => {
             );
             setPostsLength(res.data.data.posts.length);
             setPostCurrentPage(1);
-            console.log('포스트: ', res.data.data.posts);
           });
       } else {
         console.log('이미 posts 데이터가 존재');
@@ -207,7 +204,6 @@ const Admin = () => {
             );
             setBansLength(res.data.data.blacklists.length);
             setBanCurrentPage(1);
-            console.log('블랙리스트: ', res.data.data.blacklists);
           });
       } else {
         console.log('이미 blacklists 데이터가 존재');
@@ -303,7 +299,6 @@ const Admin = () => {
           toast.success('Deleted comment successfully');
 
           setComments(prev => [...prev].filter(a => a.id !== id));
-          console.log('Deleted comment successfully', res.data.message);
         })
         .catch(error => {
           toast.error('Failed to delete comment', error);

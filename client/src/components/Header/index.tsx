@@ -15,6 +15,7 @@ import {getUserQuery} from '../../api/mypage/atom';
 import MyInfo from '../MyInfo';
 import Cookies from 'js-cookie';
 import {toast} from 'react-toastify';
+import {menu} from './menu';
 declare global {
   interface Window {
     ethereum?: {
@@ -66,40 +67,8 @@ const Header = ({toggle}: PageLayoutProps) => {
     });
   }, [scrollY, headerAnimation]);
 
-  const menu = [
-    {
-      name: 'PLAY',
-      link: '/draw',
-      submenu: [
-        {name: 'PACK', link: '/draw'},
-        {name: 'UPGRADE', link: '/upgrade'},
-        // {name: '승부', link: '/prediction'},
-      ],
-    },
-    {
-      name: 'EARN',
-      link: '/gallery',
-      submenu: [
-        {name: 'STAKING', link: '/gallery'},
-        {name: 'SWAP', link: '/swap'},
-      ],
-    },
-    {name: 'MARKET', link: '/market'},
-    {name: 'WIN', link: '/win'},
-    {name: 'COMMUNITY', link: '/community'},
-    {
-      name: 'OTHERS',
-      link: '/event',
-      submenu: [
-        {name: 'EVENT', link: '/event'},
-        {name: 'DONATION', link: '/donation'},
-      ],
-    },
-  ];
-
   const login = useRecoilCallback(({set}) => async () => {
     if (!window.ethereum) {
-      console.log('Ethereum not detected in browser');
       toast.error('Ethereum not detected in browser');
       return;
     }
@@ -117,7 +86,6 @@ const Header = ({toggle}: PageLayoutProps) => {
             {withCredentials: true},
           )
           .then(res => {
-            console.log('login_post success: ', res);
             if (!res.data.data) return;
             set(userAddr, res.data.data.address);
             set(userId, res.data.data.id);
@@ -146,7 +114,6 @@ const Header = ({toggle}: PageLayoutProps) => {
     logoutRefresh();
     userRefresh();
     toast.success('logged out successfully! 🎉');
-    console.log('logout', result);
     Cookies.remove('connect.sid');
   });
 
@@ -184,15 +151,15 @@ const Header = ({toggle}: PageLayoutProps) => {
             ))}
           </Styled.NavMenu>
           <Styled.MyInfoBox>{currId !== 0 && <MyInfo />}</Styled.MyInfoBox>
-          <Styled.NavBtn>
-            <Styled.NavBtnLink
-              onClick={() => {
-                currId === 0 ? login() : logout();
-              }}
-            >
-              {currId === 0 ? 'CONNECT' : 'DISCONN'}
-            </Styled.NavBtnLink>
-          </Styled.NavBtn>
+          {/* <Styled.NavBtn> */}
+          <Styled.NavBtnLink
+            onClick={() => {
+              currId === 0 ? login() : logout();
+            }}
+          >
+            {currId === 0 ? 'Connect' : 'Disconnect'}
+          </Styled.NavBtnLink>
+          {/* </Styled.NavBtn> */}
         </Styled.NavbarContainer>
       </Styled.Nav>
     </>

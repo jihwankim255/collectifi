@@ -115,28 +115,29 @@ const NavLink = styled.div`
   height: 100%;
 `;
 
-const NavBtn = styled.nav`
-  display: flex;
-  align-items: center;
+// const NavBtn = styled.nav`
+//   display: flex;
+//   align-items: center;
 
-  @media screen and (max-width: 768px) {
-    display: none;
-  }
-`;
-const NavBtnLink = styled.div`
+//   @media screen and (max-width: 768px) {
+//     display: none;
+//   }
+// `;
+const NavBtnLink = styled.button`
+  align-items: center;
+  display: flex;
   font-weight: bold;
-  border-radius: 50px;
-  background: ${props => props.theme.mainColor};
-  white-space: nowrap;
-  padding: 13px 22px;
-  color: #fff;
-  font-size: 0.875rem;
   outline: none;
   border: none;
+  border-radius: 20px;
+  background: ${props => props.theme.mainColor};
+  white-space: nowrap;
+  padding: 1rem 1rem;
+  color: #fff;
+  font-size: 0.875rem;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
-  width: 110px;
 
   &:hover {
     transition: all 0.2s ease-in-out;
@@ -146,6 +147,9 @@ const NavBtnLink = styled.div`
   }
   &:active {
     background: ${props => darken(0.2, props.theme.mainColor)};
+  }
+  @media screen and (max-width: 768px) {
+    display: none;
   }
 `;
 
@@ -165,7 +169,7 @@ export default {
   NavMenu,
   NavItem,
   NavLink,
-  NavBtn,
+  // NavBtn,
   NavBtnLink,
   MyInfoBox,
 };

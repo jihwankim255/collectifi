@@ -31,7 +31,6 @@ const AdminLogin = () => {
     }
     return console.log(response);
   };
-  console.log(watch('username'));
   return (
     <div>
       <Styled.ModalOverlay>
@@ -39,7 +38,11 @@ const AdminLogin = () => {
           <Styled.ModalContent>
             <Styled.ModalTitle>Admin Login</Styled.ModalTitle>
             <Styled.ModalInput placeholder="username" {...register('username', {required: true})} />
-            <Styled.ModalInput placeholder="password" {...register('password', {required: true})} />
+            <Styled.ModalInput
+              placeholder="password"
+              type="password"
+              {...register('password', {required: true})}
+            />
             <Styled.ModalBtn type="submit">Login</Styled.ModalBtn>
           </Styled.ModalContent>
         </form>

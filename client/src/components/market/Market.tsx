@@ -21,7 +21,6 @@ const Market = () => {
   }, []);
 
   if (!cardList) return <></>;
-  console.log(cardList);
 
   return (
     <MarketLayout>

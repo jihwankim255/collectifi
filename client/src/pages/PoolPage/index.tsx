@@ -40,7 +40,7 @@ const PoolPage = () => {
         toast.success('Swap is Successfully finished!!!');
       }
     } else {
-      console.log('hi');
+      console.log('ended');
     }
   };
 

@@ -21,35 +21,42 @@ import AdminLogin from './pages/AdminLoginPage';
 import Admin from './pages/AdminPage';
 import WinTest from './pages/WinTest';
 import PoolPage from './pages/PoolPage';
+import styled from 'styled-components';
 
 const Router: React.FC<{toggle: () => void}> = props => {
   return (
-    <Routes>
-      <Route element={<PageLayout toggle={props.toggle} />}>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/draw" element={<DrawCardPage />} />
-        <Route path="/upgrade" element={<UpgradeCardPage />} />
-        {/* <Route path="/staking" element={<StakingPage />} /> */}
-        <Route path="/swap" element={<SwapPage />} />
-        <Route path="/pool" element={<PoolPage />} />
-        <Route path="/market" element={<MarketPage />} />
-        <Route path="/market/:id" element={<CardDetailPage />} />
-        <Route path="/user/:id" element={<UserPage />} />
-        <Route path="/win" element={<WinPage />} />
-        <Route path="/community/*" element={<Community />} />
-        <Route path="/event/*" element={<Event />} />
-        <Route path="/donation/*" element={<Donation />} />
-        <Route path="/gallery" element={<GalleryPage />} />
-        <Route path="/gallery/:id" element={<GalleryDetailPage />} />
-      </Route>
-      <Route path="/write" element={<WritePage />} />
-      <Route path="/edit" element={<EditPage />} />
-      <Route path="*" element={<NotFound />} />
-      <Route path="/admin/" element={<Admin />} />
-      <Route path="/admin/login" element={<AdminLogin />} />
-      <Route path="/wintest" element={<WinTest />} />
-    </Routes>
+    <Layout>
+      <Routes>
+        <Route element={<PageLayout toggle={props.toggle} />}>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/draw" element={<DrawCardPage />} />
+          <Route path="/upgrade" element={<UpgradeCardPage />} />
+          {/* <Route path="/staking" element={<StakingPage />} /> */}
+          <Route path="/swap" element={<SwapPage />} />
+          <Route path="/pool" element={<PoolPage />} />
+          <Route path="/market" element={<MarketPage />} />
+          <Route path="/market/:id" element={<CardDetailPage />} />
+          <Route path="/user/:id" element={<UserPage />} />
+          <Route path="/win" element={<WinPage />} />
+          <Route path="/community/*" element={<Community />} />
+          <Route path="/event/*" element={<Event />} />
+          <Route path="/donation/*" element={<Donation />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/gallery/:id" element={<GalleryDetailPage />} />
+        </Route>
+        <Route path="/write" element={<WritePage />} />
+        <Route path="/edit" element={<EditPage />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/admin/" element={<Admin />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/wintest" element={<WinTest />} />
+      </Routes>
+    </Layout>
   );
 };
 
 export default Router;
+
+const Layout = styled.div`
+  height: 100vh;
+`;

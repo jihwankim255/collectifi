@@ -24,7 +24,6 @@ const SwapPage = () => {
       {ethAmount},
       {withCredentials: true},
     );
-    console.log(response.data.data);
     setColAmount(response.data.data.colAmount);
   };
 

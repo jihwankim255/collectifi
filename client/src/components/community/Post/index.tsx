@@ -23,7 +23,9 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
   const [isOwner, setIsOwner] = useState(false);
   const [user_Id, setUser_Id] = useState(0);
   const recoilUserId = useRecoilValue(userId);
-
+  const params = {
+    tabs: 'General',
+  };
   useEffect(() => {
     // 포스트 디테일을 불러옴
     axiosInstance(`/community/${id}`).then(res => {
@@ -35,7 +37,7 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
       setPostTitle(res.data.post.title);
       setPostContent(res.data.post.content);
       setUser_Id(res.data.userId);
-      console.log('res: ', res);
+      // console.log('res: ', res);
     });
   }, [id]);
   // 게시글 수정 관련
@@ -44,23 +46,19 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
   const handleEdit = () => {
     axiosInstance(`/community/${id}/edit`)
       .then(res => {
-        console.log('게시글 수정 요청: ', res);
         navigate('/edit', {state: {title: postTitle, content: postContent, id: id}});
       })
       .catch(err => console.log('게시글 수정 err: ', err));
   };
   // 게시글 삭제 관련
   const handleDelete = () => {
-    console.log('글을 삭제하시겠습니까?');
     if (!confirm('Are you sure you want to delete the post?')) return;
     axios
       .delete(`${process.env.REACT_APP_BASE_URL}/community/${id}/delete`, {withCredentials: true})
       .then(res => {
-        console.log('글삭제 요청 결과2: ', res);
         // 글삭제 성공시 글목록 다시 불러오기
-        axiosInstance(`/community`)
+        axiosInstance(`/community`, {params})
           .then(res => {
-            console.log('res?: ', res.data);
             setPosts(
               [...res.data].map(post => {
                 return {
@@ -95,7 +93,6 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
         {withCredentials: true},
       )
       .then(res => {
-        console.log('좋아요: ', res);
         if (data == 'likes') {
           setLike(prev => prev + 1);
           toast.info('Like it!');
@@ -124,12 +121,10 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
         {withCredentials: true},
       )
       .then(res => {
-        console.log(res);
         setComments(prev => [...prev, res.data.data.result]);
         // 댓글 입력창 공백으로
         setCommnet('');
         toast.success('finished writing comments!');
-        console.log('new comments: ', res.data.data.result);
       })
       .catch(err => {
         console.log('error: ', err);
@@ -141,7 +136,6 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
   const [commentLike, setCommentLike] = useState(0);
   const [commentDislike, setCommentDislike] = useState(0);
   const handleCommentLikes = (e: number, like: string) => {
-    console.log('라이크: ', like);
     axios
       .post(
         `${process.env.REACT_APP_BASE_URL}/community/${id}/comment/${e}/like`,
@@ -149,9 +143,7 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
         {withCredentials: true},
       )
       .then(res => {
-        console.log('좋아요: ', res);
         if (res.data.data.data == 'likes') {
-          console.log('set likes: ', res.data.data.data);
           const newComments = comments.map(comment => {
             if (comment.id === e) {
               return {...comment, likes: comment.likes + 1};
@@ -162,7 +154,6 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
           setComments(newComments);
           toast.info('Like it!');
         } else if (res.data.data.data == 'dislikes') {
-          console.log('set dislikes: ', res.data.data.data);
           const newComments = comments.map(comment => {
             if (comment.id === e) {
               return {...comment, dislikes: comment.dislikes + 1};
@@ -174,7 +165,6 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
           toast.info('Disike it!');
         } else {
           // alert('Recommendations are only available once a day.');
-          console.log(res.data.data.data);
           toast.warning('Recommendations are only available once a day.');
         }
       })
@@ -190,8 +180,6 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
         withCredentials: true,
       })
       .then(res => {
-        console.log('댓글 수정 요청: ', res);
-        console.log(res.data.data);
         // Input 태그로 바꿔줌
         setIsInput(e.toString());
         // 태그 안에 내용을 입력해줌
@@ -203,14 +191,12 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
       });
   };
   const deleteComment = (e: number) => {
-    console.log('댓글을 삭제하시겠습니까?');
     if (!confirm('Are you sure you want to delete the comment?')) return;
     axios
       .delete(`${process.env.REACT_APP_BASE_URL}/community/${id}/comment/${e}`, {
         withCredentials: true,
       })
       .then(res => {
-        console.log('댓글삭제 요청 결과: ', res);
         toast.info('Deleted comment successfully.');
         // 프론트 변경
         setComments(prev => prev.filter(comment => comment.id !== e));
@@ -232,7 +218,6 @@ const PostPage = ({setCurrentPage, setPosts, posts}: PostProps) => {
         {withCredentials: true},
       )
       .then(res => {
-        console.log('댓글 수정patch: ', res);
         toast.success('Editted it successfully! 🎈');
         // 프론트 변경
         setComments(prev =>

@@ -33,7 +33,11 @@ const UpgradeCardPage = () => {
 
   const handleUpgrade = async (e: Event) => {
     e.preventDefault();
-    if (confirm('정말 강화 하시겠습니까?')) {
+    if (!target) {
+      toast.error('강화할 카드를 선택하세요');
+      return;
+    }
+    if (confirm('선택된 카드를 강화 하시겠습니까?')) {
       axios
         .post(`${process.env.REACT_APP_BASE_URL}/upgrade`, {nft: target}, {withCredentials: true})
         .then((res: any) => {
@@ -48,8 +52,6 @@ const UpgradeCardPage = () => {
         .catch(err => {
           console.log('upgrade error: ', err);
         });
-
-      console.log('yes');
     } else {
       console.log('no');
     }

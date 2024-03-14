@@ -44,7 +44,6 @@ const Donation = () => {
     e.preventDefault();
     const weiAmount = Web3.utils.toWei(amount.toString(), 'ether');
     const hexAmount = Web3.utils.toHex(weiAmount);
-    console.log(hexAmount);
     const params = [
       {
         from: '0x19A49D592c34dCcdA2B11c926609F84621e34480',
@@ -76,7 +75,6 @@ const Donation = () => {
 
       {withCredentials: true},
     );
-    console.log(response);
   };
 
   useEffect(() => {
@@ -84,10 +82,7 @@ const Donation = () => {
       .get(`${process.env.REACT_APP_BASE_URL}/donation`, {withCredentials: true})
       .then((res: any) => {
         setInfos(res.data.data.donations);
-        console.log(res.data.data.donations);
       });
-
-    console.log('hi');
   }, []);
   return (
     <Layout>

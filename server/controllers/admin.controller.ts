@@ -16,6 +16,8 @@ export const admin_login_post = async (req: MyRequest, res: Response, next: Next
     console.log('hi');
     // 1. 프론트에서 username, password 받아오기
     const {username, password} = req.body;
+    console.log('username: ', username);
+    console.log('password: ', password);
     // 2. 비밀번호 hashing 하기
     const saltRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltRounds);

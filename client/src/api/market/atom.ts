@@ -41,11 +41,9 @@ export const cardByIdQuery = selectorFamily({
     async ({get}) => {
       get(userId);
       const response = await cardById(id);
-      //console.log("cardByIdQuery", response)
       if (response.data.error) {
         throw response.data.error;
       }
-      //console.log(response.data)
       if ('status' in response && response.status !== 200) {
         throw new Error(`cardByIdQuery failed with status code ${response.status}`);
       }

@@ -20,8 +20,6 @@ const GalleryRegi: React.FC<Props> = props => {
   const [selectedTokenId, setSelectedTokenId] = useState(0);
   const addCard = useRecoilValue(addCardByGallIdQuery(props.gallId));
 
-  console.log('addCard', addCard);
-
   const handleCardClick = (index: number, token_id: number) => {
     setSelectedIndex(index);
     setSelectedTokenId(token_id);

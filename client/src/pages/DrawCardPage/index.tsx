@@ -9,6 +9,15 @@ import Fireworks from '../../components/UI/Particle2';
 import ModalAlert from '../../components/UI/ModalAlert';
 import Styled from './DrawCard.styled';
 import {CardAttributes, PackAttributes} from './types';
+import {useRecoilCallback} from 'recoil';
+import {
+  userAddr,
+  userId,
+  userNickname,
+  userAmount,
+  userReferral,
+  checkLoginQuery,
+} from '../../atom';
 
 const DrawCardPage = () => {
   const [selectedPack, setSelectedPack] = useState<PackAttributes>(0);
@@ -19,15 +28,18 @@ const DrawCardPage = () => {
   const handleButtonClick = () => {
     navigate('/');
   };
-
-  useEffect(() => {
-    console.log('He');
-  }, [card]);
+  const init = useRecoilCallback(({snapshot, set}) => async () => {
+    const result = await snapshot.getPromise(checkLoginQuery);
+    if (!result) return;
+    set(userAddr, result.address);
+    set(userId, result.id);
+    set(userNickname, result.nickname);
+    set(userAmount, result.token_amount);
+    set(userReferral, result.referral);
+  });
 
   const handleSubmit = async (e: any) => {
-    console.log(e);
     setSelectedPack(e);
-    console.log('selected: ', selectedPack);
 
     if (confirm('정말 구매하시겠습니까?')) {
       axios
@@ -64,11 +76,9 @@ const DrawCardPage = () => {
           title={'Buy Now'}
           message={'Are you sure you want to buy it?'}
           onConfirm={() => {
-            console.log('no!');
             setModal(false);
           }}
           onConfirm2={() => {
-            console.log('yes!');
             setModal(false);
             // setCard({
             //   token_id: 1,
@@ -93,11 +103,12 @@ const DrawCardPage = () => {
                 toast.success('Successfully Minted your Nft!🎉');
                 console.log('Success: ', res.data.data.mintedNft);
               })
+              .then(() => {
+                init();
+              })
               .catch(err => {
                 console.log('err: ', err);
               });
-            console.log('yes');
-            // toast.success('Successfully minted your NFT card! 🎈');
           }}
         />
       )}

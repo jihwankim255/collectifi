@@ -36,12 +36,13 @@ export const upgrade_post = async (req: MyRequest, res: Response, next: NextFunc
     const id = req.session.user?.id;
     const userAddress = req.session.user?.address;
     const {nft} = req.body;
+    console.log('nft: ');
     const user = await db.User.findOne({
       where: {
         id,
       },
     });
-    console.log('======유저=====', user);
+    console.log('======유저=====');
     //색이 브론즈인 카드를 강화한다.
     if (nft.card_color == 0) {
       const isSuccess = Math.random() <= 0.99;
@@ -65,26 +66,26 @@ export const upgrade_post = async (req: MyRequest, res: Response, next: NextFunc
               card_color: nft.card_color + 1,
             },
           });
-          console.log('======업그레이드카드=======', upgradeCard);
+          console.log('======업그레이드카드=======');
           const approve = await erc721Contract.methods
             .approve(process.env.SERVER_ADDRESS, nft.token_id)
             .send({from: user.address, gas: 500000});
 
-          console.log('======approve=====', approve);
+          console.log('======approve=====');
 
           const transferFrom = await erc721Contract.methods
             .transferFrom(userAddress, process.env.SERVER_ADDRESS, nft.token_id)
             .send({from: userAddress, gas: 500000});
-          console.log('======transferFrom=====', transferFrom);
+          console.log('======transferFrom=====');
           const result = await erc721Contract.methods
             .mintNFT(user.address, upgradeCard.img_url, upgradeCard.player, upgradeCard.season, 0)
             .send({from: process.env.SERVER_ADDRESS, gas: 500000});
-          console.log('======리절트=======', result);
+          console.log('======리절트=======');
           //다음 등급의 nft를 db에 업데이트해준다
-          const token_id = await erc721Contract.methods.getTokenId().call();
+          // const token_id = await erc721Contract.methods.getTokenId().call();
           if (result) {
             const mintedNft = await db.Nft.create({
-              token_id,
+              token_id: '1',
               user_id: id,
               player: upgradeCard.player,
               season: upgradeCard.season,
@@ -113,7 +114,7 @@ export const upgrade_post = async (req: MyRequest, res: Response, next: NextFunc
       }
     }
     if (nft.card_color == 1) {
-      const isSuccess = Math.random() <= 0.3;
+      const isSuccess = Math.random() <= 1;
       const money = 1000;
       //보유한 토큰의 수가 강화 비용보다 많은지 확인한다.
       if (user.token_amount >= money) {
@@ -144,10 +145,10 @@ export const upgrade_post = async (req: MyRequest, res: Response, next: NextFunc
             .mintNFT(user.address, upgradeCard.img_url, upgradeCard.player, upgradeCard.season, 0)
             .send({from: process.env.SERVER_ADDRESS, gas: 500000});
           //다음 등급의 nft를 db에 업데이트해준다
-          const token_id = await erc721Contract.methods.getTokenId().call();
+          // const token_id = await erc721Contract.methods.getTokenId().call();
           if (result) {
             const mintedNft = await db.Nft.create({
-              token_id,
+              token_id: '1',
               user_id: id,
               player: upgradeCard.player,
               season: upgradeCard.season,

@@ -69,7 +69,6 @@ const MyPage = () => {
   const handleGallClick = useRecoilCallback(
     ({snapshot}) =>
       async (gallId: number, tokenId: number, endTime: Date, now: Date) => {
-        //console.log(endTime < now);
         if (endTime > now) {
           navigate(`/gallery/${gallId}`);
           return;
@@ -78,7 +77,6 @@ const MyPage = () => {
         if (!userInfo.isOwner) return;
         //withdraw
         const withdrawQ = await snapshot.getPromise(withdrawQuery(tokenId));
-        console.log(withdrawQ);
         if (!withdrawQ) {
           openModal('카드반환 실패', '데이터 요청에 실패했어요.');
           return;
@@ -89,14 +87,12 @@ const MyPage = () => {
           withdrawData.gallca,
           withdrawData.withdraw,
         );
-        console.log(withdrawResult);
         if (!withdrawResult) {
           openModal('카드반환 실패', '카드반환에 실패했어요.');
           return;
         }
         //db업데이트
         const updateResult = await updateWithdraw(gallId, tokenId);
-        console.log(updateResult);
         if (!updateResult) {
           openModal('카드반환 실패', '카드반환 내역 저장에 실패했어요.');
           return;
@@ -118,7 +114,6 @@ const MyPage = () => {
     };
   }, [id]);
 
-  console.log(userInfo, cardList, postList, gallInfo?.data.data.nfts);
   if (!userInfo || !cardList || !postList || !gallInfo) return <></>;
   const gallList = gallInfo.data.data.nfts;
   const cardWidth = '250px';
@@ -217,7 +212,6 @@ const MyPage = () => {
             const gallEndTime = new Date(el.Nft_galleries[0].Gallery.date);
             const endTime = new Date(el.Nft_galleries[0].nft_end_time);
             const now = new Date();
-            //console.log(i, gallEndTime, endTime < now, gallEndTime < now);
             //stake end date 날짜설정
             const formattedEndTime = endTime.toLocaleDateString();
             const formattedGallEndTime = gallEndTime.toLocaleDateString();

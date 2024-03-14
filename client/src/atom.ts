@@ -36,7 +36,6 @@ export const checkLoginQuery = selector({
     //get(userAddr);
     const response = await checkLogin();
     if (!response) return null;
-    console.log('checkloginquery: ', response.data);
     return response.data;
   },
 });

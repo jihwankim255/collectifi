@@ -50,7 +50,7 @@ const ContentBox = styled.div`
   flex-direction: column;
   padding: 30px;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   /* background: green; */
 `;
 
@@ -65,7 +65,7 @@ const MenuItemS = styled(MenuItem)<MenuItemSProps>`
 `;
 const PostDetail = styled.div<{active: boolean}>`
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -120,13 +120,13 @@ const BanIcon = styled(FontAwesomeIcon)`
 
 const BoardListAdmin = styled(BoardList)`
   width: 100%;
-  height: 100%;
+  /* min-height: 100vh; */
   /* background-color: brown; */
 `;
 
 const BoardListItemAdmin = styled(BoardListItem)`
   width: 100%;
-  height: 100%;
+  /* min-height: 100%; */
   /* background-color: yellow; */
 `;
 

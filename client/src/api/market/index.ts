@@ -48,7 +48,7 @@ export const sellApprove = async (id: number) => {
 
 export const sellRegi = async (id: number, price: number) => {
   //if(!ISCONNECT) return sellCardData;
-  console.log('sellRegi', id, price);
+  // console.log('sellRegi', id, price);
   const options = {
     method: 'POST',
     url: `${process.env.REACT_APP_BASE_URL}/market/sell`,

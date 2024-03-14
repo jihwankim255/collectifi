@@ -11,7 +11,7 @@ export default function Init() {
     set(userNickname, result.nickname);
     set(userAmount, result.token_amount);
     set(userReferral, result.referral);
-    console.log('init', result);
+    // console.log('init', result);
   });
 
   useEffect(() => {

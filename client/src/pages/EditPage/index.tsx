@@ -15,17 +15,13 @@ const EditPage = () => {
 
   useEffect(() => {
     if (location.state.title && location.state.content) {
-      console.log('location.state.title: ', location.state.title);
-      console.log('location.state.content: ', location.state.content);
       setTitle(location.state.title);
       setContent(location.state.content);
       setid(location.state.id);
     }
-    console.log('location: ', location);
   }, []);
 
   const handleSubmit = () => {
-    console.log('id 파라미터:', id);
     axios
       .patch(
         `${process.env.REACT_APP_BASE_URL}/community/${id}/edit`,
@@ -33,7 +29,6 @@ const EditPage = () => {
         {withCredentials: true},
       )
       .then(res => {
-        console.log('게시글 수정patch: ', res);
         navigate('/community');
         toast.success('Editted it successfully! 🎈');
       })

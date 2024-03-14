@@ -79,7 +79,6 @@ const CardDetail = () => {
     }
     //판매등록 요청
     const sellRegi = await snapshot.getPromise(getSellRegiQuery);
-    console.log(sellRegi);
     if (!sellRegi) {
       openModal('판매등록 실패', '판매등록에 실패 했어요.');
       return;

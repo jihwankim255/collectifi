@@ -27,7 +27,6 @@ const Gallery = () => {
 
   if (!galleries) return <></>;
   const gallData = galleries.data.gallerys;
-  console.log('gal', galleries);
   return (
     <GalleryLayout>
       <PageTitle title="GALLERY" />
